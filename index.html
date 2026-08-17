@@ -896,16 +896,24 @@ const ALL=[
    {desc:"The module blueprint",ans:"mbp 301",folder:"Resources",label:"MBP 301"}],
   fbGood:"Repo complete. Every file is findable by name alone, which is the point of the convention.",
   fbBad:"Repo complete. The prefix table is in the Handbook, and looking it up is the intended method."}},
-{id:"d1x",title:"Exit ticket · Unit 1",crumb:"Unit 1 · Close",
- mins:5,
- lead:"A lesson day should close as deliberately as it opens. Summarize what you took from today before moving on.",
- coach:"Answer both in a sentence or two, then Save. That closes Unit 1.",
- html:`<div class="meta"><span class="mi">🔍</span><div><b>Design note. Steal this:</b> this day opened with objectives and closes with an exit ticket. The exact daily rhythm you'll practice in the day designer next. We practice what we teach.</div></div><p style="margin-top:14px"><strong>Optional evening watch</strong>, why we design for evidence, not “learning styles”:</p><div class="video"><iframe src="https://www.youtube.com/embed/rhgwIhB58PA" title="Veritasium: The Biggest Myth in Education (14 min)" loading="lazy" allowfullscreen></iframe></div><div class="vidcap">🎯 <b>Watch task:</b> note the study strategies that beat matching content to a “style”: you’ll recognize them in our framework tomorrow. Player blocked? <a href="https://www.youtube.com/watch?v=rhgwIhB58PA" target="_blank" rel="noopener">Open on YouTube</a>.</div><div class="meta"><span class="mi">🔍</span><div><b>Design note. Steal this:</b> a video never ships without a watch task. Purpose turns passive viewing into activated learning. The same conversion you’ll practice in the day designer.</div></div>`,
- activity:{type:"journal",id:"d1xj",fields:[
-  {label:"What's one thing about the pipeline you'd explain differently now than you would have this morning?",ph:"Before, I thought... now I'd say..."},
-  {label:"Which naming rule do you suspect you'll forget first? (Open the 📘 Handbook and find where it lives. That lookup habit is the real answer.)",ph:"Probably the one about..."}],model:"The pipeline as a <em>loop</em> (step 7 feeds step 1); infrastructure requests belonging in Initiation, before anything assumes an environment exists; backward design at Planning. And on naming. The honest answer is that nobody memorizes the table: knowing it lives in the Handbook <em>is</em> the skill."}},
-]},
-{day:2,mod:"2 · Designing learning",lessons:[
+{id:"d1x",title:"Unit 1 check: make the call",crumb:"Unit 1 \u00b7 Unaided check",mins:8,
+ lead:"One package, no hints. Every readiness call you made this unit came with feedback attached; this one does not. Read it, commit to a verdict on each point, and only then compare against how an experienced reviewer scored it.",
+ html:`<div class="box rule"><span class="bh">How this one works</span><p class="tight">There is no retry and no immediate right or wrong. You score each line, submit, and then the reviewer\u2019s scoring appears next to yours with the reasoning. Where you differ is the useful part: it tells you which rule you are still applying loosely. Nothing here is recorded or sent anywhere.</p></div>
+ <p>Scale for each line: <b>1</b> = missing or unusable, <b>2</b> = present but with a gap you would document, <b>3</b> = present and current, no action needed.</p>`,
+ coach:"Score all three lines, then Submit to compare with the reviewer.",
+ activity:{type:"rubric",id:"d1xr",points:9,
+  dossier:{meta:"Handoff package \u00b7 UCI 1044 \u00b7 customized build for a named client",
+   text:"Program overview: present, dated this month. Module build specifications: present for modules 1 through 3, absent for module 4, which the outline says exists. Target job description: present, dated 19 months ago, and the client has since renamed the role. Classroom technology inventory: present, dated last week. Client notes: present, including two constraints on tooling. Nothing in the package flags the module 4 gap or the job description age."},
+  dims:[
+   {t:"Load-bearing documents: are build specifications present for the whole scope?",ans:1,
+    why:"Reviewer: 1. Specifications are missing for module 4 while the outline says module 4 exists. Build specifications are load-bearing, so a gap in scope coverage is not a documentable constraint, it is a blocker. Partial coverage is the trap here: three of four present can read as \u201Cmostly fine\u201D until someone starts building module 4 from nothing."},
+   {t:"Freshness of what the outcomes depend on: is the job description usable?",ans:2,
+    why:"Reviewer: 2. It is present, so it is not a 1, but 19 months old with a renamed role means objectives derived from it would train for a job that changed. That is exactly the case for ready-with-constraints: name the staleness, name who owns re-confirming the role with the client, and proceed on the modules that do not depend on it."},
+   {t:"Client notes for a customized build: present and sufficient?",ans:3,
+    why:"Reviewer: 3. Present, and they carry the two tooling constraints, which is what client notes are for on a customized build. This is the one line with no action. Noticing that not every line is a problem matters as much as catching the ones that are."}],
+  fbGood:"You matched the reviewer on all three. The pattern worth keeping: a missing load-bearing document blocks, an aging input becomes a documented constraint with an owner, and a complete input gets left alone.",
+  fbBad:"Compare each line against the reviewer\u2019s reasoning above. The two calls that separate reviewers: partial specification coverage is a blocker rather than a constraint, and an aging job description is a constraint rather than a blocker. If you scored those the other way round, that is the distinction to carry into Unit 2."},
+ transition:"That was the whole unit applied without a safety net. Unit 2 moves from judging packages to designing what goes inside them."},
 {id:"d2i",title:"Unit 2 · Designing learning",crumb:"Unit 2 · Open",
  mins:7,
  lead:"Unit 1 was how work moves. This unit: how learning is designed: backwards.",
@@ -1665,7 +1673,23 @@ function paintResult(l){
   let r=document.getElementById("res-"+a.id);
   if(!r){r=document.createElement("div");r.id="res-"+a.id;fb.parentNode.insertBefore(r,fb.nextSibling);}
   r.className="result full";
-  r.innerHTML='<span class="star">★</span><span><b>'+pts+' points. Mastered.</b> Corrections along the way were the design, not a deduction: the feedback is the curriculum.</span>';
+  // Report what actually happened. Per-item try counts exist for judged activities
+  // (review, triage); anything else just reports completion.
+  let firstTry=0, tracked=0;
+  for(let i=0;i<40;i++){
+    const t=ST.data[a.id+'-t'+i];
+    if(t===undefined) continue;
+    tracked++; if(t===0) firstTry++;
+  }
+  let msg;
+  if(tracked>0 && firstTry===tracked){
+    msg='<b>Complete. '+tracked+' of '+tracked+' right on the first try.</b>';
+  }else if(tracked>0){
+    msg='<b>Complete. '+firstTry+' of '+tracked+' right on the first try.</b> Review the items you corrected: the explanation for each is above.';
+  }else{
+    msg='<b>Activity complete.</b>';
+  }
+  r.innerHTML='<span class="star">★</span><span>'+msg+'</span>';
 }
 
 /* ---------- lesson drawer ---------- */

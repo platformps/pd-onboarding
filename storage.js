@@ -1,154 +1,148 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex,nofollow">
-<title>Product Development Onboarding &middot; Per Scholas</title>
-<style>
-  body{margin:0;background:#faf7f2;-webkit-font-smoothing:antialiased}
-  a:focus-visible{outline:3px solid #0078c0;outline-offset:2px}
-</style>
-</head>
-<body>
-<div style="max-width:1080px;margin:0 auto;font-family:Arial,Helvetica,sans-serif;color:#1c2b3a;line-height:1.6;">
+/* ============================================================
+   storage.js — persistence for the HOSTED version of the course.
 
-  <div style="background:#004878;border-radius:16px;padding:0;overflow:hidden;border-bottom:6px solid #fcc048;">
-    <div style="background:#ffffff;padding:20px 34px;border-bottom:3px solid #009cd8;">
-      <img src="data:image/png;base64,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" alt="Per Scholas" style="height:46px;display:block;">
-    </div>
-    <div style="padding:34px 40px 38px;">
-      <div style="font-family:'Courier New',monospace;font-size:12px;letter-spacing:2px;color:#78c0cc;text-transform:uppercase;margin-bottom:12px;">Product Development</div>
-      <h1 style="color:#ffffff;font-size:34px;line-height:1.12;margin:0 0 14px;">Product Development Onboarding</h1>
-      <p style="color:#cfe6f2;font-size:18px;margin:0;max-width:680px;">How we build job-shaped learning at Per Scholas: by doing the real work on real products, one decision at a time.</p>
-    </div>
-  </div>
+   Drop-in replacement for scorm.js. Same API surface, so the course
+   code needs no changes. Progress is saved in the browser's
+   localStorage instead of an LMS.
 
-  <div style="padding:26px 4px 6px;">
-    <p style="font-size:15.5px;margin:0 0 14px;">Welcome to the team. Over the next few days you'll work with two real Per Scholas courses, taking them through readiness, designing their learning, building their materials, and reviewing their quality. You apply our standards to real work instead of reading about them, and the later units build on what you decided earlier.</p>
-    <p style="font-size:15.5px;margin:0;">This is a <strong>learning experience, not a test.</strong> There are no grades. When you get something wrong, the course explains why and you try again. The point is to build the confidence and judgment you'll use on day one of the real job.</p>
-  </div>
+   What this means in practice:
+   - Progress is per-browser, per-device. A learner who switches
+     machines starts fresh.
+   - Nothing is reported to Canvas. Completion is not tracked.
+   - Updating the course = replace these files on the host. Learner
+     progress is untouched, because it lives in their browser.
+   ============================================================ */
+var SCORM = (function () {
+  var KEY = "ps-pd-onboarding-v1";
+  var started = Date.now();
 
-  <h2 style="font-size:20px;margin:30px 0 6px;color:#12283f;">The portfolio you'll work</h2>
-  <p style="font-size:14.5px;color:#5a6b7b;margin:0 0 16px;">You'll see both, then pick one as your primary project for the hands-on work.</p>
+  function read() {
+    try {
+      var raw = window.localStorage.getItem(KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) {
+      return {};
+    }
+  }
 
-  <div style="display:flex;gap:14px;flex-wrap:wrap;">
-    <div style="flex:1 1 340px;background:#ffffff;border:1px solid #e2dccf;border-radius:12px;border-top:5px solid #0c4878;padding:18px 20px;">
-      <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:1px;color:#0c4878;text-transform:uppercase;margin-bottom:6px;">Track 1 &middot; IT Support</div>
-      <div style="font-weight:bold;font-size:16px;margin-bottom:8px;">IT Support (UCI)</div>
-      <p style="font-size:14px;color:#42566a;margin:0;">A blended course that pairs CompTIA content with our own. The design problem is making sure learners can prove they can do the job, rather than only pass a vendor exam.</p>
-    </div>
-    <div style="flex:1 1 340px;background:#ffffff;border:1px solid #e2dccf;border-radius:12px;border-top:5px solid #0078c0;padding:18px 20px;">
-      <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:1px;color:#0078c0;text-transform:uppercase;margin-bottom:6px;">Track 2 &middot; Software Engineering</div>
-      <div style="font-weight:bold;font-size:16px;margin-bottom:8px;">Software Engineering: MERN (UCI)</div>
-      <p style="font-size:14px;color:#42566a;margin:0;">Our own end-to-end MERN full-stack program. Here the challenge is different: making sure you can see each learner's competence inside team-based projects.</p>
-    </div>
-  </div>
+  function write(obj) {
+    try {
+      window.localStorage.setItem(KEY, JSON.stringify(obj));
+      return true;
+    } catch (e) {
+      /* storage full, private mode, or blocked in an iframe */
+      return false;
+    }
+  }
 
-  <!-- ============ ORIENTATION / LOGISTICS ============ -->
-  <h2 style="font-size:20px;margin:32px 0 6px;color:#12283f;">Getting oriented</h2>
-  <p style="font-size:14.5px;color:#5a6b7b;margin:0 0 16px;">A few things to know before you start. Cohort-specific information and links will be added where needed.</p>
+  /* Detect whether storage is usable at all, so we can warn once. */
+  var usable = (function () {
+    try {
+      var t = "__ps_test__";
+      window.localStorage.setItem(t, "1");
+      window.localStorage.removeItem(t);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  })();
 
-  <div style="display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px;">
-    <div style="flex:1 1 300px;background:#ffffff;border:1px solid #e2dccf;border-radius:12px;border-top:5px solid #009cd8;padding:16px 20px;">
-      <div style="font-weight:bold;font-size:15px;color:#12283f;margin-bottom:10px;">Who you'll work with</div>
-      <p style="font-size:13.5px;color:#12283f;margin:0 0 3px;font-weight:bold;">Keyla Centeno Diaz, Senior Director of Learning Experience Design</p>
-      <p style="font-size:13px;color:#42566a;margin:0 0 12px;">Oversees learning experience strategy, product quality, and the systems and standards that support curriculum development.</p>
-      <p style="font-size:13.5px;color:#12283f;margin:0 0 3px;font-weight:bold;">Douglas Conklin, Senior Director of Instructional Design &amp; Development</p>
-      <p style="font-size:13px;color:#42566a;margin:0 0 12px;">Manages the Product Development SMEs and is your primary contact for curriculum development work, project questions, priorities, and day-to-day support.</p>
-      <p style="font-size:13px;color:#42566a;margin:0;">You'll also work closely with the SME or Product Developer assigned to your domain, and with other Curriculum Solutions partners depending on the project.</p>
-    </div>
-    <div style="flex:1 1 300px;background:#ffffff;border:1px solid #e2dccf;border-radius:12px;border-top:5px solid #78c0cc;padding:16px 20px;">
-      <div style="font-weight:bold;font-size:15px;color:#12283f;margin-bottom:10px;">Where things live</div>
-      <p style="font-size:13.5px;color:#12283f;margin:0 0 3px;font-weight:bold;">Product Hub: https://productops.perscholas.org/product-hub</p>
-      <p style="font-size:13px;color:#42566a;margin:0 0 12px;">The central source for Product Development information, resources, templates, standards, and supporting links.</p>
-      <p style="font-size:13.5px;color:#12283f;margin:0 0 3px;font-weight:bold;">Templates &amp; course resources</p>
-      <p style="font-size:13px;color:#42566a;margin:0 0 12px;">Each onboarding unit tells you which templates or resources you'll need and where to find them in the Product Hub.</p>
-      <p style="font-size:13.5px;color:#12283f;margin:0 0 3px;font-weight:bold;">Questions &amp; team communication</p>
-      <p style="font-size:13px;color:#42566a;margin:0;">Use the Curriculum Solutions Slack channel for questions, updates, blockers, and anything the team should see.</p>
-    </div>
-  </div>
+  return {
+    storageAvailable: usable,
 
-  <div style="background:#ffffff;border:1px solid #e2dccf;border-radius:12px;border-top:5px solid #fcc048;padding:16px 20px;margin-bottom:14px;">
-    <div style="font-weight:bold;font-size:15px;color:#12283f;margin-bottom:8px;">Access you'll need</div>
-    <p style="font-size:13.5px;color:#42566a;margin:0 0 8px;">Before beginning each unit, confirm that you can access:</p>
-    <ul style="font-size:13.5px;color:#42566a;margin:0 0 8px;padding-left:20px;line-height:1.7;">
-      <li>The Product Hub</li>
-      <li>The Curriculum Solutions Slack channel</li>
-      <li>Any course repositories, systems, or tools identified in the unit instructions</li>
-    </ul>
-    <p style="font-size:13.5px;color:#42566a;margin:0;">The unit guide tells you what access is required and where the materials live. If something is missing or you can't reach a required resource, contact Douglas Conklin.</p>
-  </div>
+    init: function () {
+      if (!usable && typeof console !== "undefined") {
+        console.warn("Progress cannot be saved: browser storage is unavailable.");
+      }
+      return usable;
+    },
 
-  <div style="background:#eaf4fa;border:1px solid #b9dcec;border-radius:12px;padding:16px 20px;margin-bottom:8px;">
-    <div style="font-weight:bold;font-size:15px;color:#12283f;margin-bottom:6px;">How to use this course</div>
-    <p style="font-size:13.5px;color:#42566a;margin:0;line-height:1.7;">Work through the four units in order, since each one builds on the last. Go at your own pace. Your progress saves, so you can pick up where you left off. The course is hands-on, so expect to make decisions rather than read. At the end, you'll build a real Module Development Package (a planned module plus one built lesson, in a repo you create) and review it with your manager.</p>
-  </div>
+    /* --- suspend data: the whole course state object --- */
+    getSuspend: function () {
+      var d = read();
+      return d.state || null;
+    },
+    setSuspend: function (state) {
+      var d = read();
+      d.state = state;
+      d.updated = new Date().toISOString();
+      return write(d);
+    },
 
-  <h2 style="font-size:20px;margin:32px 0 6px;color:#12283f;">The four units</h2>
-  <p style="font-size:14.5px;color:#5a6b7b;margin:0 0 16px;">Do them in order. Each one assumes only what the one before it taught, and Canvas keeps track of which you have finished.</p>
+    /* --- bookmark: resume where the learner left off --- */
+    setBookmark: function (id) {
+      var d = read();
+      d.bookmark = String(id).slice(0, 255);
+      return write(d);
+    },
+    getBookmark: function () {
+      return read().bookmark || "";
+    },
 
-  <a href="unit1.html" style="display:block;text-decoration:none;background:#ffffff;border:1px solid #e2dccf;border-left:5px solid #004878;border-radius:10px;padding:16px 20px;margin-bottom:12px;">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;align-items:baseline;gap:8px;">
-      <div style="font-weight:bold;font-size:16px;color:#12283f;">Unit 1: Welcome, Portfolio & Readiness</div>
-      <div style="font-family:'Courier New',monospace;font-size:11px;color:#8a97a4;">~85 min</div>
-    </div>
-    <p style="font-size:14px;color:#42566a;margin:8px 0 10px;">Learn how a course is structured and what each stage of development produces. Judge whether handoff packages are ready to build, then choose the project you work for the rest of the course.</p>
-    <div style="font-size:13.5px;font-weight:bold;color:#004878;">Open Unit 1 &rarr;</div>
-  </a>
+    /* --- completion + score: recorded locally only --- */
+    markComplete: function () {
+      var d = read();
+      d.completed = true;
+      d.completedAt = d.completedAt || new Date().toISOString();
+      return write(d);
+    },
+    complete: function () {
+      return this.markComplete();
+    },
+    setScore: function (pct) {
+      var d = read();
+      d.progressPct = Math.max(0, Math.min(100, Math.round(pct || 0)));
+      return write(d);
+    },
 
-  <a href="unit2.html" style="display:block;text-decoration:none;background:#ffffff;border:1px solid #e2dccf;border-left:5px solid #0078c0;border-radius:10px;padding:16px 20px;margin-bottom:12px;">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;align-items:baseline;gap:8px;">
-      <div style="font-weight:bold;font-size:16px;color:#12283f;">Unit 2: Designing Learning</div>
-      <div style="font-family:'Courier New',monospace;font-size:11px;color:#8a97a4;">~50 min</div>
-    </div>
-    <p style="font-size:14px;color:#42566a;margin:8px 0 10px;">Review draft objectives against the standard, design a lesson day that meets the activated-learning bar, and decide what a module needs to contain.</p>
-    <div style="font-size:13.5px;font-weight:bold;color:#0078c0;">Open Unit 2 &rarr;</div>
-  </a>
+    /* --- interactions: kept locally so a learner can review their own history --- */
+    logInteraction: function (id, response, correct, correctResponse) {
+      try {
+        var d = read();
+        d.interactions = d.interactions || [];
+        d.interactions.push({
+          id: id,
+          response: String(response == null ? "" : response).slice(0, 255),
+          correct: !!correct,
+          expected: String(correctResponse == null ? "" : correctResponse).slice(0, 255),
+          at: new Date().toISOString()
+        });
+        if (d.interactions.length > 500) d.interactions = d.interactions.slice(-500);
+        return write(d);
+      } catch (e) {
+        return false;
+      }
+    },
 
-  <a href="unit3.html" style="display:block;text-decoration:none;background:#ffffff;border:1px solid #e2dccf;border-left:5px solid #009cd8;border-radius:10px;padding:16px 20px;margin-bottom:12px;">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;align-items:baseline;gap:8px;">
-      <div style="font-weight:bold;font-size:16px;color:#12283f;">Unit 3: Building Content</div>
-      <div style="font-family:'Courier New',monospace;font-size:11px;color:#8a97a4;">~57 min</div>
-    </div>
-    <p style="font-size:14px;color:#42566a;margin:8px 0 10px;">Review a lab draft, run an accessibility audit against WCAG 2.1 AA, correct an AI-written draft, and decide which AI workflows are defensible.</p>
-    <div style="font-size:13.5px;font-weight:bold;color:#009cd8;">Open Unit 3 &rarr;</div>
-  </a>
+    /* --- session time: stored, not transmitted --- */
+    reportSessionTime: function () {
+      try {
+        var d = read();
+        var secs = Math.max(0, Math.floor((Date.now() - started) / 1000));
+        d.totalSeconds = (d.totalSeconds || 0) + secs;
+        started = Date.now();
+        return write(d);
+      } catch (e) {
+        return false;
+      }
+    },
 
-  <a href="unit4.html" style="display:block;text-decoration:none;background:#ffffff;border:1px solid #e2dccf;border-left:5px solid #0c4878;border-radius:10px;padding:16px 20px;margin-bottom:12px;">
-    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;align-items:baseline;gap:8px;">
-      <div style="font-weight:bold;font-size:16px;color:#12283f;">Unit 4: Quality & Capstone</div>
-      <div style="font-family:'Courier New',monospace;font-size:11px;color:#8a97a4;">~65 min</div>
-    </div>
-    <p style="font-size:14px;color:#42566a;margin:8px 0 10px;">Judge whether a course is ready to launch, score a submission against a rubric and compare with an expert, route change requests, then plan your first module.</p>
-    <div style="font-size:13.5px;font-weight:bold;color:#0c4878;">Open Unit 4 &rarr;</div>
-  </a>
+    commit: function () {
+      return true; /* every write is immediate */
+    },
+    finish: function () {
+      this.reportSessionTime();
+      return true;
+    },
 
-  <div style="background:#eaf4fa;border:1px solid #b9dcec;border-radius:12px;padding:20px 22px;margin:26px 0;">
-    <h2 style="font-size:18px;margin:0 0 8px;color:#12283f;">Your permanent reference</h2>
-    <p style="font-size:14.5px;color:#42566a;margin:0 0 14px;">The course teaches you the standards. The <strong>Product Hub</strong> is where the always-current version lives: templates, naming conventions, policies, and the full Playbook. Keep it bookmarked long after onboarding.</p>
-    <a href="https://productops.perscholas.org/product-hub" style="display:inline-block;background:#004878;color:#ffffff;text-decoration:none;font-weight:bold;font-size:14px;padding:10px 22px;border-radius:8px;">Open the Product Hub &rarr;</a>
-  </div>
-
-  <div style="background:#ffffff;border:1px solid #e2dccf;border-left:5px solid #009cd8;border-radius:12px;padding:20px 22px;margin:26px 0;">
-    <div style="font-family:'Courier New',monospace;font-size:11px;letter-spacing:1.5px;color:#0078c0;text-transform:uppercase;margin-bottom:8px;">Looking ahead</div>
-    <h2 style="font-size:18px;margin:0 0 8px;color:#12283f;">Where this is heading: UPP</h2>
-    <p style="font-size:14.5px;color:#42566a;margin:0 0 10px;">The way we build is changing. We're moving to <strong>UPP</strong>, our own content platform, which will become the home for Product Development work. As it rolls out, more of your work and resources will live there.</p>
-    <p style="font-size:14px;color:#5a6b7b;margin:0;">Either way, <strong>what this onboarding teaches doesn't change when the tools do.</strong> You're learning the standards and the judgment behind good learning design: how to write a real objective, when a module needs a summative, how to hold quality under pressure. That knowledge applies on any platform. We'll cover UPP specifics once it's ready, so for now, focus on the craft.</p>
-  </div>
-
-  <h2 style="font-size:20px;margin:28px 0 10px;color:#12283f;">What to expect</h2>
-  <ul style="font-size:14.5px;color:#3c4d5e;padding-left:20px;margin:0 0 8px;">
-    <li style="margin-bottom:8px;"><strong>It's hands-on.</strong> Each lesson gives you a short concept, a real scenario, and a worked example, then hands it to you. A coach bar tells you what to do at each step, and there's a Hint button if you get stuck.</li>
-    <li style="margin-bottom:8px;"><strong>It remembers what you do.</strong> Your project choice and your decisions are saved, so each unit builds on the last instead of resetting.</li>
-    <li style="margin-bottom:8px;"><strong>No grades.</strong> Canvas only records that you finished each unit. Anything you write in a reflection stays private, for your own thinking.</li>
-    <li style="margin-bottom:8px;"><strong>It ends in real work.</strong> Your capstone is a real module package you build and review with your manager or mentor. Think of it as your first actual assignment, not a throwaway quiz.</li>
-  </ul>
-
-  <div style="border-top:1px solid #e2dccf;margin-top:26px;padding-top:16px;">
-    <p style="font-size:13.5px;color:#5a6b7b;margin:0;">Questions during onboarding? Reach out to <strong>kcentenodiaz@perscholas.org (LXD) or dconklin@perscholas.org</strong>. Welcome to Product Development.</p>
-  </div>
-
-</div>
-</body>
-</html>
+    /* --- utility for the learner: wipe local progress --- */
+    reset: function () {
+      try {
+        window.localStorage.removeItem(KEY);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }
+  };
+})();

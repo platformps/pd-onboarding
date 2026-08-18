@@ -437,7 +437,6 @@
     </div>
   </div>
   <main><div class="content" id="content"></div></main>
-  <div id="pvbadge" style="display:none;position:fixed;bottom:14px;right:14px;z-index:9999;background:#fc7800;color:#fff;font-family:Arial,sans-serif;font-size:11px;font-weight:700;letter-spacing:.05em;padding:7px 13px;border-radius:20px;box-shadow:0 2px 8px rgba(0,0,0,.25)">👁 PREVIEW MODE: nav unlocked (admin only)</div>
 </div>
 
 <div class="ld-scrim" id="ldscrim"></div>
@@ -1801,27 +1800,7 @@ function updateRing(){
   const _dn=FLAT.filter(x=>ST.done[x.id]).length;document.getElementById("scorechip").textContent = _dn? "✓ "+_dn+" / "+FLAT.length+" done": "✓, ";
 }
 function idx(id){return FLAT.findIndex(l=>l.id===id);}
-/* ---------- author / preview mode ----------
-   Add ?preview=1 to the launch URL (or press Shift+P) to unlock all navigation
-   for admins/authors. Learners never see this; the normal gated flow is unchanged. */
-const CAPSTONE_ASSIGNMENT_URL = ""; /* paste the Canvas assignment URL here to make the button a direct link */
-let PREVIEW = false;
-function detectPreview(){
-  const pat=/[?&#]preview=1/;
-  try{ if(pat.test(location.search)||pat.test(location.hash)) return true; }catch(e){}
-  // Canvas launches SCORM in an iframe. Check the parent/top window URL too
-  try{ if(window.parent && window.parent!==window && pat.test(window.parent.location.href)) return true; }catch(e){}
-  try{ if(window.top && pat.test(window.top.location.href)) return true; }catch(e){}
-  // remembered across a session (survives iframe reloads)
-  try{ if(sessionStorage.getItem("pd_preview")==="1") return true; }catch(e){}
-  return false;
-}
-PREVIEW = detectPreview();
-function setPreview(on){ PREVIEW=on; try{sessionStorage.setItem("pd_preview",on?"1":"0");}catch(e){}
-  renderLessonNav(); refreshNav();
-  const b=document.getElementById("pvbadge"); if(b)b.style.display=on?"block":"none"; }
-function togglePreview(){ setPreview(!PREVIEW); }
-try{ window.addEventListener("keydown",e=>{ if(e.shiftKey&&(e.key==="P"||e.key==="p")) togglePreview(); }); }catch(e){}
+
 
 function unlocked(i){
   // Lesson gating is handled by Canvas module requirements, not here.
@@ -1872,14 +1851,13 @@ function paintResult(l){
 /* ---------- lesson drawer ---------- */
 function renderLessonNav(){
   const el=document.getElementById("ldbody");
-  const adminBtn=PREVIEW?`<button type="button" id="pvtoggle" style="width:100%;box-sizing:border-box;margin:0 0 10px;padding:8px 10px;border:1.5px dashed #fc7800;background:#fff3e8;color:#c85a00;border-radius:8px;font-family:var(--sans,Arial);font-size:11.5px;font-weight:700;cursor:pointer;letter-spacing:.03em">👁 PREVIEW ON: select to return to learner view</button>`:"";
+  const adminBtn="";
   el.innerHTML=adminBtn+COURSE.map(m=>{
     const _note=``;
     return `<div><div class="mod-title">${m.mod}</div>${_note}<div class="lnav">${
     m.lessons.map(l=>{const i=idx(l.id),u=unlocked(i),d=ST.done[l.id];
       return `<a data-id="${l.id}" class="${ST.current===l.id?'on':''} ${u?'':'locked'}"${u?'':' title="Locked until you finish the previous unit"'}><span class="dot ${d?'done':''}">${d?'✓':(u?'':'🔒')}</span><span>${l.title}${l.mins?` <small style="opacity:.55">· ${l.mins}m</small>`:``}</span></a>`;}).join("")
   }</div></div>`;}).join("");
-  const pvt=document.getElementById("pvtoggle"); if(pvt)pvt.onclick=()=>togglePreview();
   el.querySelectorAll("a").forEach(a=>a.onclick=()=>{
     const i=idx(a.dataset.id);if(!unlocked(i))return;
     ST.current=a.dataset.id;closeLessons();render();});
@@ -2123,7 +2101,7 @@ function wire(l){
         msg.textContent="✗ No pending file matches that name. Check the prefix (GLAB / R-GLAB / ALAB / Quiz / KBA / MBP) and whether it's lesson-level (301.1) or module-level (301).";
       }
     };
-    document.getElementById("mk-"+A).addEventListener("keydown",e=>{if(e.key==="Enter")btn.select();});
+    document.getElementById("mk-"+A).addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();btn.click();}});
   }
 
   if(a.type==="track"){
@@ -2375,7 +2353,7 @@ function wire(l){
 /* ---------- render ---------- */
 function refreshNav(){
   const l=FLAT.find(x=>x.id===ST.current),i=idx(l.id),next=FLAT[i+1];
-  const gate=PREVIEW?false:((l.activity&&!ST.done[l.id])||(l.demo&&ST.data['dm-'+l.id]!=='done'&&!ST.done[l.id]));
+  const gate=((l.activity&&!ST.done[l.id])||(l.demo&&ST.data['dm-'+l.id]!=='done'&&!ST.done[l.id]));
   const nb=document.getElementById("nextb");if(!nb)return;
   nb.disabled=!next||gate;
   const ln=document.getElementById("locknote");if(ln)ln.style.display=gate?"block":"none";
@@ -2387,7 +2365,7 @@ function render(keepScroll){
   let h=`<div class="crumb">${l.crumb}${l.mins?` <span style="margin-left:6px;background:#e9eef4;color:#5b6b7a;border-radius:10px;padding:1px 9px;font-size:9.5px;letter-spacing:.05em">≈ ${l.mins} MIN</span>`:``}</div><h1>${l.title}</h1><div class="lead">${typeof l.lead==="function"?l.lead():l.lead}</div>${l.frame?frame(typeof l.frame==='function'?l.frame():l.frame):''}${(typeof l.html==='function'?l.html():(l.html||''))}${l.brief?briefHtml(typeof l.brief==='function'?l.brief():l.brief):''}${coachBar(l)}`;
   if(l.prompt)h+=`<div class="prompt"><div class="prompt-h"><span class="pl">${l.prompt.label}</span><button type="button" class="copy" id="cpy">Copy</button></div><pre>${l.prompt.text.replace(/\[([^\]]+)\]/g,'<span class="v">[$1]</span>')}</pre></div>`;
   const _dmv=ST.data['dm-'+l.id];
-  const dmDone=PREVIEW||!l.demo||_dmv==='done'||ST.done[l.id];
+  const dmDone=!l.demo||_dmv==='done'||ST.done[l.id];
   if(l.demo&&!dmDone){
     const k=(typeof _dmv==='number')?_dmv:0;
     h+=`<div class="demo"><div class="dh3"><span class="dt">🎬 Watch one first: a worked example</span><button type="button" class="dskip" id="dmskip">Skip: I’ve got it</button></div>
@@ -2463,13 +2441,8 @@ window.addEventListener("load",()=>{SCORM.init();load();render();renderGuide();
     if(c){const w=document.createElement("div");w.className="box rule";w.style.marginBottom="14px";
       w.innerHTML='<span class="bh">Progress will not save</span><p class="tight">This browser is blocking local storage, so your place in the course cannot be remembered. You can still work through everything, but closing the tab will lose your progress. Opening the course in a normal (non-private) window usually fixes it.</p>';
       c.insertBefore(w,c.firstChild);}
-  }if(PREVIEW){const b=document.getElementById("pvbadge");if(b)b.style.display="block";}
-  // secret admin trigger: 5 quick clicks on the course title toggles preview (invisible to learners)
-  try{
-    const t=document.querySelector(".title"); if(t){ t.style.cursor="default"; let n=0,last=0;
-      t.addEventListener("click",()=>{ const now=Date.now(); n=(now-last<600)?n+1:1; last=now; if(n>=5){ n=0; togglePreview(); } });
-    }
-  }catch(e){}
+  }
+
 });
 window.addEventListener("pagehide",()=>{persist();SCORM.finish();});
 window.addEventListener("beforeunload",()=>{persist();SCORM.finish();});

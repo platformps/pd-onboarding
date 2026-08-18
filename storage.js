@@ -70,13 +70,19 @@ var SCORM = (function () {
     },
 
     /* --- bookmark: resume where the learner left off --- */
-    setBookmark: function (id) {
+    /* Bookmarks are stored per unit, because the four unit pages share this
+       storage and a bookmark from one unit is meaningless in another. */
+    setBookmark: function (id, unit) {
       var d = read();
-      d.bookmark = String(id).slice(0, 255);
+      d.bookmarks = d.bookmarks || {};
+      d.bookmarks[unit || "all"] = String(id).slice(0, 255);
+      d.bookmark = String(id).slice(0, 255); /* kept for older builds */
       return write(d);
     },
-    getBookmark: function () {
-      return read().bookmark || "";
+    getBookmark: function (unit) {
+      var d = read();
+      if (d.bookmarks && d.bookmarks[unit || "all"]) return d.bookmarks[unit || "all"];
+      return "";
     },
 
     /* --- completion + score: recorded locally only --- */

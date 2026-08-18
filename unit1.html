@@ -546,6 +546,8 @@ const CASE_ORDER = ["itsupport","software"];
 
 /* ---------- v3: decision memory ---------- */
 function dashHtml(){
+  // Nothing to report until the learner has chosen a project.
+  if(!ST.track) return "";
   const memRows=[];
   const M=ST.mem||{};
   if(ST.track)memRows.push("Primary project: <b>"+CASES[ST.track].domain+"</b>");
@@ -618,16 +620,24 @@ const ALL=[
  <p><strong>How the four units build:</strong> Unit 1 gives you the system. How courses are structured, flow through the pipeline, and get filed. Unit 2 works from the outside in. You start with the module objectives Design sent, work out what the module needs to contain, then design a single day inside it, then the assessments that prove any of it happened. Unit 3 builds the materials those designs call for. Unit 4 checks quality and hands the work to you. Each unit assumes only what the previous one taught.</p>
  <p style="margin-top:4px"><strong>By the end of Unit 1 you’ll be able to:</strong></p>
  <ul class="obj"><li>Explain how our courses are structured, and read any file ID like an address</li><li>Walk a course through all seven pipeline steps, making the right call at each gate</li><li>Route any intake request, and build a module repo with every file named to convention</li></ul>
- <div class="box info"><span class="bh">Personalize your examples</span>
- <p class="tight">A few activities adapt their examples to your home domain. Pick yours. You can change it here anytime, and it never changes what’s being taught, only the flavor of the examples:</p>
- <div class="stamps" id="dompick" style="margin-top:8px">
- <button type="button" data-d="it">🖥 IT / Infrastructure</button>
- <button type="button" data-d="swe">⌨ Software Engineering</button>
- <button type="button" data-d="mix">A bit of everything</button>
- </div></div>
+ 
  <div class="box rule"><span class="bh">The standing rule</span>AI drafts, you decide. Every AI output is a proposal you verify, correct, and own. The same standard learners are graded on.</div>
  <div class="meta"><span class="mi">🔍</span><div><b>Design note:</b> this page covered the mission, the map, and the mechanics before instructing you in anything. Orientation before instruction is worth doing in your own courses.</div></div>`,
  activity:{type:"commit",id:"w00c",items:["I clicked all four stages of the journey map","I know the 🧭 coach bar tells me what to do, and the 📘 Handbook (top right) holds every term and rule","I understand wrong answers explain themselves. This is for my learning, not a grade; the feedback is the point"]}},
+{id:"pick",title:"Choose your primary project",crumb:"Unit 1 · Portfolio → Primary",mins:5,
+ lead:"Before anything else, pick which of our two courses you want to work with. Everything you do from here uses it: the packages you review, the files you name, the module you plan at the end. Per Scholas runs more courses than these two, so choose whichever is closer to the domain you were hired into. You can change it later from the lessons menu.",
+ frame:function(){return {
+   prev:"On In Unit 1 you compared both active projects across readiness, identifiers, and domain differences.",
+   now:"It's time to be assigned a primary project for hands-on practicum work.",
+   role:"You are the Product Developer taking ownership of one build.",
+   resp:"Select the project you'll carry through Days 2\u20134. Choose the domain you actually work in when you can.",
+   use:"The portfolio dashboard above; both case files.",
+   why:"Every later activity: objectives, assessments, labs, QA, and your final brief, uses this project. Your decisions will accumulate on it.",
+   next:"You'll build this project's module repository, then design and develop it over the next three days."
+ };},
+ html:`<div id="dashslot"></div><div class="portfolio-badge">Portfolio → Primary</div><p>Both are real Per Scholas courses. Pick whichever is closest to the domain you'll be building for:</p>`,
+ coach:"<b>Select a card</b> to set it as your course. You can see both anytime in the dashboard. This only decides which one your hands-on work uses, and you can change it before you continue.",
+ activity:{type:"track",id:"pickt",points:5}},
 {id:"w0",title:"Why we build the way we do",crumb:"Welcome · The philosophy",
  mins:7,
  lead:"The standards in this course come from a few beliefs about how adults learn. This page covers those beliefs, because the standards make more sense once you know what they are for.",
@@ -658,13 +668,12 @@ const ALL=[
  <div class="meta"><span class="mi">🔍</span><div><b>Design note:</b> this page gave the reasoning before the process: mission, audience, beliefs, then how we work. Adults engage more readily with materials that explain why, so put the reasoning first.</div></div>`,
  activity:{type:"journal",id:"w0j",fields:[
   {label:"Warm-up: what drew you to building learning for career-changers, and which of the five principles is closest to how you already work?",ph:"Honestly…"}]}},
-
 {id:"wj",title:"The job, defined",crumb:"Welcome · The role",
  mins:8,
  lead:"Curriculum development here covers four responsibilities. Learn what they are, and where our work ends and Delivery’s begins.",
  demo:{eg:"“Deciding which assessments close module 2, and writing their rubrics.”",steps:["First question I always ask: does this shape what a learner <em>experiences</em>, or how we <em>know it worked</em>? Assessments and rubrics are the definition of ‘how we know.’","Second: is anyone else’s lane closer? Delivery teaches the class; Design scopes the outline. Designing evidence sits squarely with us: it’s the Measurement face.","Verdict: ✓ Approve, ours. Take the queue with the same two questions on every statement."]},
  coach:"Read the four responsibilities and the boundary below: <b>the queue only asks about what’s on this page</b>. Then <b>✓ Approve</b> statements that describe our job and <b>✗ Send back</b> those that don’t, naming exactly why.",
- hint:"The test for “our job”: does it shape what a learner experiences, or how we know it worked? Designing evidence, writing materials, improving from feedback, ours. Building the Canvas course and running the live classroom: our partners in Delivery.",
+ hint:"The test for “our job”: does it shape what a learner experiences, or how we know it worked? Designing evidence, writing materials, improving from feedback, ours. Building the Canvas course and running the live classroom: others in the delivery stage, not us.",
  html:`<p><strong>The four responsibilities of the role:</strong></p>
  <div class="terms"><div class="th">🔤 The four responsibilities</div><dl>
  <dt>Architecture</dt><dd>Deciding outcomes and what evidence proves them, before any content exists. Its artifacts: outlines, objectives, and assessment plans.</dd>
@@ -674,34 +683,41 @@ const ALL=[
  <p><strong>And the boundary:</strong> we do not run the live classroom. Our partners in <strong>Delivery</strong> teach the cohorts; our job is making every course runnable <em>without us</em>: through facilitator guides, instructor training, and blueprints. The working test: if a course needs its author in the room to function, its facilitator guide failed.</p>
  <div class="meta"><span class="mi">🔍</span><div><b>Design note:</b> teach, then assess. This queue only tests what this page taught. Do not assess learners on material they have not been given.</div></div>
  <p><strong>Where our work ends.</strong> Product Development builds everything about a course except the live classroom. We design the outcomes, write the materials, build the assessments, and produce what an instructor needs in order to teach it. Delivery runs it with learners. The line matters because both sides fail when it blurs: if we assume Delivery will fill gaps, the guide ships thin; if we try to script the classroom, we remove the instructor\u2019s judgment where it is most needed.</p>
- <div class="diag"><svg viewBox="0 0 720 210" role="img" aria-labelledby="wjb-t"><title id="wjb-t">Who owns what: Design sets the objectives, Development decides how they are met, Delivery teaches the course</title>
- <rect x="14" y="14" width="220" height="182" rx="12" fill="#f3f0ea" stroke="#e8e1d6" stroke-width="1.5"/>
- <rect x="250" y="14" width="220" height="182" rx="12" fill="#e3edf8" stroke="#1d5fa8" stroke-width="2"/>
- <rect x="486" y="14" width="220" height="182" rx="12" fill="#f3f0ea" stroke="#e8e1d6" stroke-width="1.5"/>
- <text x="124" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="#5a6b7b">DESIGN</text>
- <text x="360" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="#164a85">DEVELOPMENT (us)</text>
- <text x="596" y="40" text-anchor="middle" font-size="13" font-weight="700" fill="#5a6b7b">DELIVERY TEAM</text>
- <text x="124" y="66" text-anchor="middle" font-size="11.5" fill="#42566a">Module outcomes</text>
- <text x="124" y="84" text-anchor="middle" font-size="11.5" fill="#42566a">Module objectives</text>
- <text x="124" y="102" text-anchor="middle" font-size="11.5" fill="#42566a">Key topics</text>
- <text x="124" y="120" text-anchor="middle" font-size="11.5" fill="#42566a">New course or revision</text>
- <text x="360" y="66" text-anchor="middle" font-size="11.5" fill="#1c2b3a">Lesson objectives</text>
- <text x="360" y="84" text-anchor="middle" font-size="11.5" fill="#1c2b3a">Activities and labs</text>
- <text x="360" y="102" text-anchor="middle" font-size="11.5" fill="#1c2b3a">Assessments and rubrics</text>
- <text x="360" y="120" text-anchor="middle" font-size="11.5" fill="#1c2b3a">Technology and sequence</text>
- <text x="360" y="138" text-anchor="middle" font-size="11.5" fill="#1c2b3a">Facilitator guide</text>
- <text x="596" y="66" text-anchor="middle" font-size="11.5" fill="#42566a">Building it in Canvas</text>
- <text x="596" y="84" text-anchor="middle" font-size="11.5" fill="#42566a">Teaching the cohort</text>
- <text x="596" y="102" text-anchor="middle" font-size="11.5" fill="#42566a">Grading learner work</text>
- <text x="596" y="120" text-anchor="middle" font-size="11.5" fill="#42566a">Classroom decisions</text>
- <line x1="234" y1="105" x2="248" y2="105" stroke="#1d5fa8" stroke-width="2"/><polygon points="248,105 242,101 242,109" fill="#1d5fa8"/>
- <line x1="470" y1="105" x2="484" y2="105" stroke="#1d5fa8" stroke-width="2"/><polygon points="484,105 478,101 478,109" fill="#1d5fa8"/>
- <text x="124" y="172" text-anchor="middle" font-size="10.5" fill="#7a8a99">we collaborate here</text>
- <text x="360" y="172" text-anchor="middle" font-size="10.5" fill="#164a85" font-weight="600">we decide here</text>
- <text x="596" y="172" text-anchor="middle" font-size="10.5" fill="#7a8a99">Canvas and the classroom</text>
-</svg><div class="dcap">Design sets what learners must be able to do. We decide how they get there. Delivery runs it.</div></div>
- <div class="box rule"><span class="bh">Where the work starts, and where it starts being ours</span><p class="tight"><b>Design</b> owns what a course is for: the module outcomes and objectives, the key topics, and whether a request becomes a new course at all. We are not spectators while that happens. Development collaborates with Design during the design phase, and this is where you raise anything you can see will not be buildable. But the outcomes and objectives are theirs to set.<br><b>Development</b> owns how those objectives get met. We write the lesson-level objectives that break a module objective into teachable steps, then decide the activities, the assessments, the technology, and how the whole thing flows. Design may suggest an approach at a high level; the decisions about how are ours.<br><b>The Delivery team</b>, known internally as the <b>Canvas team</b>, takes it from there. They build the course in Canvas, teach the cohorts, grade learner work, and make the calls that come up in the room. That is their whole scope, and it does not include producing any of the documents we produce. We also do not disappear at handoff: during the delivery stage we work with <b>IDQA</b> so instructors have the content and can upskill on it before they teach.</p></div>
- <div class="box info"><span class="bh">Two things both called delivery</span><p class="tight">Delivery means two different things here. <b>The delivery stage</b> is a phase of the pipeline, and instructor training happens in it. That training is our work, alongside IDQA. <b>The Delivery team</b> is the group most people call the <b>Canvas team</b>, and Canvas is what they do: they build the course there and run it with learners. They do not write the outline, the materials, the blueprint, or the training content, so none of the folders in our shared drive are theirs.</p></div>
+ <div class="diag"><svg viewBox="0 0 720 250" role="img" aria-labelledby="wjb-t"><title id="wjb-t">Design sets the objectives, Development decides how they are met, and the delivery stage covers both building the Canvas course and teaching it</title>
+ <rect x="14" y="14" width="216" height="222" rx="12" fill="#f3f0ea" stroke="#e8e1d6" stroke-width="1.5"/>
+ <rect x="246" y="14" width="216" height="222" rx="12" fill="#e3edf8" stroke="#1d5fa8" stroke-width="2"/>
+ <rect x="478" y="14" width="228" height="222" rx="12" fill="#f3f0ea" stroke="#e8e1d6" stroke-width="1.5"/>
+ <text x="122" y="38" text-anchor="middle" font-size="12.5" font-weight="700" fill="#5a6b7b">DESIGN STAGE</text>
+ <text x="354" y="38" text-anchor="middle" font-size="12.5" font-weight="700" fill="#164a85">DEVELOPMENT STAGE</text>
+ <text x="592" y="38" text-anchor="middle" font-size="12.5" font-weight="700" fill="#5a6b7b">DELIVERY STAGE</text>
+ <text x="122" y="54" text-anchor="middle" font-size="9.5" fill="#8a97a4">Design team, with us</text>
+ <text x="354" y="54" text-anchor="middle" font-size="9.5" fill="#4a7fb5">us</text>
+ <text x="592" y="54" text-anchor="middle" font-size="9.5" fill="#8a97a4">three different groups</text>
+ <text x="122" y="82" text-anchor="middle" font-size="11.5" fill="#42566a">Module outcomes</text>
+ <text x="122" y="100" text-anchor="middle" font-size="11.5" fill="#42566a">Module objectives</text>
+ <text x="122" y="118" text-anchor="middle" font-size="11.5" fill="#42566a">Key topics</text>
+ <text x="122" y="136" text-anchor="middle" font-size="11.5" fill="#42566a">New course or revision</text>
+ <text x="354" y="82" text-anchor="middle" font-size="11.5" fill="#1c2b3a">Lesson objectives</text>
+ <text x="354" y="100" text-anchor="middle" font-size="11.5" fill="#1c2b3a">Activities and labs</text>
+ <text x="354" y="118" text-anchor="middle" font-size="11.5" fill="#1c2b3a">Assessments and rubrics</text>
+ <text x="354" y="136" text-anchor="middle" font-size="11.5" fill="#1c2b3a">Technology and sequence</text>
+ <text x="354" y="154" text-anchor="middle" font-size="11.5" fill="#1c2b3a">Facilitator guide</text>
+ <line x1="490" y1="70" x2="694" y2="70" stroke="#e0d8c8" stroke-width="1"/>
+ <text x="496" y="86" font-size="10" font-weight="700" fill="#8a6a00">Canvas team</text>
+ <text x="496" y="102" font-size="11" fill="#42566a">Builds the course in Canvas</text>
+ <line x1="490" y1="114" x2="694" y2="114" stroke="#e0d8c8" stroke-width="1"/>
+ <text x="496" y="130" font-size="10" font-weight="700" fill="#8a6a00">Instructors</text>
+ <text x="496" y="146" font-size="11" fill="#42566a">Teach the cohort</text>
+ <text x="496" y="162" font-size="11" fill="#42566a">Grade learner work</text>
+ <text x="496" y="178" font-size="11" fill="#42566a">Classroom decisions</text>
+ <line x1="490" y1="190" x2="694" y2="190" stroke="#e0d8c8" stroke-width="1"/>
+ <text x="496" y="206" font-size="10" font-weight="700" fill="#164a85">Us, with IDQA</text>
+ <text x="496" y="222" font-size="11" fill="#42566a">Instructor training</text>
+ <line x1="230" y1="120" x2="244" y2="120" stroke="#1d5fa8" stroke-width="2"/><polygon points="244,120 238,116 238,124" fill="#1d5fa8"/>
+ <line x1="462" y1="120" x2="476" y2="120" stroke="#1d5fa8" stroke-width="2"/><polygon points="476,120 470,116 470,124" fill="#1d5fa8"/>
+</svg><div class="dcap">Three stages, not three teams. The delivery stage alone involves three different groups, and one of them is us.</div></div>
+ <div class="box rule"><span class="bh">Where the work starts, and where it starts being ours</span><p class="tight"><b>Design</b> owns what a course is for: the module outcomes and objectives, the key topics, and whether a request becomes a new course at all. We are not spectators while that happens. Development collaborates with Design during the design phase, and this is where you raise anything you can see will not be buildable. But the outcomes and objectives are theirs to set.<br><b>Development</b> owns how those objectives get met. We write the lesson-level objectives that break a module objective into teachable steps, then decide the activities, the assessments, the technology, and how the whole thing flows. Design may suggest an approach at a high level; the decisions about how are ours.<br><b>The delivery stage</b> is where three different groups do three different jobs. The <b>Canvas team</b>, which is what most people mean when they say the Delivery team, builds the course in Canvas. That is their scope: the build, not the teaching. <b>Instructors</b> teach the cohort, grade the work, and make the calls that come up in the room. And <b>we</b> are in this stage too, working with <b>IDQA</b> so instructors have the content and can upskill on it before they teach.</p></div>
+ <div class="box info"><span class="bh">Two things both called delivery</span><p class="tight">Delivery means two different things here, and the difference matters. <b>The delivery stage</b> is a phase of the pipeline. Three groups work in it: the Canvas team builds the course, instructors teach it, and we handle instructor training with IDQA. <b>The Delivery team</b> is narrower than the stage. It is the group most people call the <b>Canvas team</b>, and building the Canvas course is what they do. They do not teach, and they do not write the outline, the materials, the blueprint, or the training content, so none of the folders in our shared drive are theirs.</p></div>
  <div class="box info"><span class="bh">Two things both called planning</span><p class="tight">Design plans the <b>package</b>: what the course is, what learners must be able to do, and what the outline contains. Development plans the <b>build</b>: how to reach those objectives, in what order, with which activities and tools. Both are planning, and they are not the same phase. When you see Planning in our pipeline, it means ours: lesson objectives and assessment design, decisions rather than content.</p></div>
  <div class="box info"><span class="bh">The four responsibilities</span><p class="tight"><b>Architect.</b> Decide what learners must be able to do and in what order, from the job backward.<br><b>Author.</b> Build the lessons, labs, and assessments to standard.<br><b>Measurer.</b> Design the evidence, and make sure it actually measures the objective.<br><b>Steward.</b> Keep the course accurate and teachable over time: revisions, change requests, and the paper trail that lets someone else pick it up.</p></div>
  <p><strong>The handoff is the deliverable.</strong> Our job is to make an instructor <em>able</em> to run the course without us: the facilitator guide, the blueprint, the training. Building that handoff is our work. What happens in the room is theirs.</p>
@@ -714,9 +730,9 @@ const ALL=[
     reasons:[]},
    {content:"Standing in front of a cohort and teaching the course live, week by week.",
     good:false,
-    why:"✗ Not ours. Delivery teaches the cohorts, and they also build the course in Canvas. We make that possible: facilitator guides, blueprints, and working with IDQA during the delivery stage so instructors have the content to upskill on before they teach it. Building the handoff is our job; the classroom is theirs.",
+    why:"✗ Not ours. Instructors teach the cohorts. Note that this is not the Canvas team either: they build the course, instructors run it. We make the teaching possible through facilitator guides, blueprints, and working with IDQA so instructors can upskill on the content first. Building the handoff is our job; the classroom is the instructor's.",
     reasons:[
-     {t:"Live instruction belongs to Delivery, along with building it in Canvas. Our job is making the course runnable without us: guides, blueprints, and working with IDQA so instructors can upskill",ok:true,fb:""},
+     {t:"Live instruction belongs to instructors, and the Canvas build to the Canvas team. Our job is making the course runnable without us: guides, blueprints, and working with IDQA so instructors can upskill",ok:true,fb:""},
      {t:"Teaching is beneath the Product Development team",fb:"Nothing beneath anyone. It's a division of craft, not status. Delivery are experts at the classroom; we're experts at what goes into it."},
      {t:"We do teach, but only the first cohort",fb:"Not even the first. If a course needs its author in the room to work, the facilitator guide failed QA."}]},
    {content:"Writing the labs, assessments, and rubrics learners will work through.",
@@ -924,20 +940,6 @@ const ALL=[
     {from:"MERN SWE",subj:"Design says: new UCI",body:"A client wants our MERN course customized to their onboarding stack and timeline.",ans:0,why:"Build everything. A customized build gets its own identifier because its content and constraints diverge from the market course. Expect client notes in the handoff, and expect them to be load-bearing."},
     {from:"Delivery",subj:"Design says: no product change",body:"Instructors are asking for extra practice material because learners arrive without the prerequisites.",ans:2,why:"Build nothing, at least not from this request. The problem is admissions or prerequisites, not the course. Raise it rather than quietly adding material that papers over an intake gap."}]},
  transition:"You can now read an intake decision and say what it costs us to build. Next, the naming convention that keeps all of that work findable."},
-{id:"pick",title:"Choose your primary project",crumb:"Unit 1 · Portfolio → Primary",mins:5,
- lead:"You've seen both courses. Now pick the one you'll work through for the rest of this course. Per Scholas runs more courses than these two, so choose whichever is closer to the domain you were hired into. You'll still see both at checkpoints, but your design, development, and QA work follows the one you pick here.",
- frame:function(){return {
-   prev:"On In Unit 1 you compared both active projects across readiness, identifiers, and domain differences.",
-   now:"It's time to be assigned a primary project for hands-on practicum work.",
-   role:"You are the Product Developer taking ownership of one build.",
-   resp:"Select the project you'll carry through Days 2\u20134. Choose the domain you actually work in when you can.",
-   use:"The portfolio dashboard above; both case files.",
-   why:"Every later activity: objectives, assessments, labs, QA, and your final brief, uses this project. Your decisions will accumulate on it.",
-   next:"You'll build this project's module repository, then design and develop it over the next three days."
- };},
- html:`<div id="dashslot"></div><div class="portfolio-badge">Portfolio → Primary</div><p>Both are real Per Scholas courses. Pick whichever is closest to the domain you'll be building for:</p>`,
- coach:"<b>Select a card</b> to set it as your course. You can see both anytime in the dashboard. This only decides which one your hands-on work uses, and you can change it before you continue.",
- activity:{type:"track",id:"pickt",points:5}},
 {id:"s3",title:"Build the module repo",crumb:"Unit 1 · Simulation",
  mins:8,
  lead:"Every build starts with a correctly-named repository. Practice the naming convention on a standard module example: create each required file with the right prefix and number, and watch the repo assemble. The same convention applies to every project you'll build.",
@@ -1010,7 +1012,7 @@ const ALL=[
      {t:"GLAB 301.2.1",fb:"Close, but this one is graded, and the R- prefix is what marks that. Without it, the file name says the lab is ungraded."}]}],
   fbGood:"You took the request from intake to a staged repo without building on a guess and without blocking work a constraint could unblock. Those are the two failures this unit exists to prevent.",
   fbBad:"Read the explanations on the ones you changed. The three that separate reviewers: the intake call belongs to Design, a stale input is a documented constraint rather than a blocker, and the blueprint is a Developing artifact."},
- transition:"That is Unit 1 applied end to end. Unit 2 moves from judging what arrives to designing what goes inside it."},
+ transition:"That is Unit 1 applied end to end. Unit 2 moves from judging what arrives to designing what goes inside it."}
 ]},
 {day:2,mod:"2 · Designing learning",lessons:[
 {id:"d2i",title:"Unit 2 · Designing learning",crumb:"Unit 2 · Open",
@@ -1774,11 +1776,22 @@ let ST={current:FLAT[0].id,done:{},earned:{},cap:false,data:{},track:null,mem:{}
 
 function load(){
   const s=SCORM.getSuspend();if(s)ST=Object.assign(ST,s);
-  try{ const bm=SCORM.getBookmark(); if(bm && FLAT.some(l=>l.id===bm)) ST.current=bm; }catch(e){}
+  // The unit files share one storage, so ST.current may point at a lesson that
+  // does not exist in this file. Resolve a valid starting lesson for THIS unit.
+  try{
+    const bm=SCORM.getBookmark(DAY);           // per-unit bookmark
+    if(bm && FLAT.some(l=>l.id===bm)){ ST.current=bm; return; }
+  }catch(e){}
+  if(!FLAT.some(l=>l.id===ST.current)){
+    // no valid bookmark: open at the first lesson of this unit that is not finished,
+    // which is where the learner actually left off
+    const firstUndone=FLAT.find(l=>!ST.done[l.id]);
+    ST.current=(firstUndone||FLAT[FLAT.length-1]).id;
+  }
 }
 function persist(){
   SCORM.setSuspend(ST);
-  try{ if(ST.current) SCORM.setBookmark(ST.current); }catch(e){}
+  try{ if(ST.current) SCORM.setBookmark(ST.current, DAY); }catch(e){}
   // completion progress (%). How many of THIS unit's activities are done, ignoring correctness
   try{
     const acts=FLAT.filter(l=>l.activity);
@@ -1793,11 +1806,11 @@ function persist(){
 }
 function updateRing(){
   const pct=Math.round(FLAT.filter(l=>ST.done[l.id]).length/FLAT.length*100);
-  document.getElementById("ring").style.setProperty("--p",pct);
-  document.getElementById("ringpct").textContent=pct+"%";
+  const _r=document.getElementById("ring"); if(_r)_r.style.setProperty("--p",pct);
+  const _rp=document.getElementById("ringpct"); if(_rp)_rp.textContent=pct+"%";
   let earned=0,avail=0;
   FLAT.forEach(l=>{if(l.activity&&l.activity.points!=null&&ST.done[l.id]){avail+=l.activity.points;earned+=(ST.earned[l.activity.id]||0);}});
-  const _dn=FLAT.filter(x=>ST.done[x.id]).length;document.getElementById("scorechip").textContent = _dn? "✓ "+_dn+" / "+FLAT.length+" done": "✓, ";
+  const _dn=FLAT.filter(x=>ST.done[x.id]).length;const _sc=document.getElementById("scorechip"); if(_sc)_sc.textContent = _dn? "✓ "+_dn+" / "+FLAT.length+" done": "✓, ";
 }
 function idx(id){return FLAT.findIndex(l=>l.id===id);}
 
@@ -1851,13 +1864,22 @@ function paintResult(l){
 /* ---------- lesson drawer ---------- */
 function renderLessonNav(){
   const el=document.getElementById("ldbody");
-  const adminBtn=`<div style="font-family:var(--mono);font-size:9.5px;color:#b9c6d2;text-align:right;margin:0 0 8px">build ${BUILD}</div>`;
+  const _pj=ST.track&&CASES[ST.track]?CASES[ST.track].domain:"not chosen yet";
+  const projBox=`<div style="background:#f3f0ea;border:1px solid #e8e1d6;border-radius:9px;padding:9px 11px;margin:0 0 12px">
+    <div style="font-size:10px;letter-spacing:.06em;color:#7a8a99;font-family:var(--mono);margin-bottom:3px">YOUR PROJECT</div>
+    <div style="font-size:12.5px;font-weight:700;color:#1c2b3a;margin-bottom:7px">${_pj}</div>
+    <div id="pjsw" style="display:flex;gap:6px">${CASE_ORDER.map(id=>`<button type="button" data-t="${id}" style="flex:1;padding:5px 6px;font-size:10.5px;border-radius:6px;cursor:pointer;border:1.5px solid ${ST.track===id?'#1d5fa8':'#e8e1d6'};background:${ST.track===id?'#e3edf8':'#fff'};color:${ST.track===id?'#164a85':'#5a6b7b'};font-weight:${ST.track===id?'700':'400'}">${CASES[id].tag}</button>`).join("")}</div>
+  </div>`;
+  const adminBtn=projBox+`<div style="font-family:var(--mono);font-size:9.5px;color:#b9c6d2;text-align:right;margin:0 0 8px">build ${BUILD}</div>`;
   el.innerHTML=adminBtn+COURSE.map(m=>{
     const _note=``;
     return `<div><div class="mod-title">${m.mod}</div>${_note}<div class="lnav">${
     m.lessons.map(l=>{const i=idx(l.id),u=unlocked(i),d=ST.done[l.id];
       return `<a data-id="${l.id}" class="${ST.current===l.id?'on':''} ${u?'':'locked'}"${u?'':' title="Locked until you finish the previous unit"'}><span class="dot ${d?'done':''}">${d?'✓':(u?'':'🔒')}</span><span>${l.title}${l.mins?` <small style="opacity:.55">· ${l.mins}m</small>`:``}</span></a>`;}).join("")
   }</div></div>`;}).join("");
+  try{ document.querySelectorAll("#pjsw button").forEach(b=>{
+    b.onclick=()=>{ ST.track=b.dataset.t; remember("track",CASES[b.dataset.t].domain); persist(); renderLessonNav(); render(); };
+  }); }catch(e){ console.warn("project switch:",e); }
   el.querySelectorAll("a").forEach(a=>a.onclick=()=>{
     const i=idx(a.dataset.id);if(!unlocked(i))return;
     ST.current=a.dataset.id;closeLessons();render();});
@@ -1898,7 +1920,9 @@ function coachBar(l){
   return `<div class="coach"><div class="cface">🧭</div><div class="ct"><b>What to do:</b> ${coach}</div>${l.hint?'<button type="button" class="hint-btn" id="hintbtn">Hint</button>':''}</div>${l.hint?`<div class="hint" id="hintbox">💡 ${l.hint}</div>`:''}`;
 }
 function getAct(l){
-  if(l.variants&&ST.domain&&l.variants[ST.domain])return l.variants[ST.domain];
+  // Some lessons carry a variant for the Software Engineering project. Use the
+  // learner's chosen project (set in Unit 1) rather than a separate control.
+  if(l.variants && ST.track==="software" && l.variants.swe) return l.variants.swe;
   return l.activity;
 }
 function actHtml(l){
@@ -2360,6 +2384,11 @@ function refreshNav(){
   if(next&&!gate)nb.onclick=()=>{ST.current=next.id;render();};
 }
 function render(keepScroll){
+  // Guard: a shared-storage ST.current can point outside this unit. Recover rather than throw.
+  if(!FLAT.some(x=>x.id===ST.current)){
+    const fu=FLAT.find(x=>!ST.done[x.id]);
+    ST.current=(fu||FLAT[0]).id;
+  }
   const l=FLAT.find(x=>x.id===ST.current),i=idx(l.id);
   const prev=FLAT[i-1],next=FLAT[i+1];
   let h=`<div class="crumb">${l.crumb}${l.mins?` <span style="margin-left:6px;background:#e9eef4;color:#5b6b7a;border-radius:10px;padding:1px 9px;font-size:9.5px;letter-spacing:.05em">≈ ${l.mins} MIN</span>`:``}</div><h1>${l.title}</h1><div class="lead">${typeof l.lead==="function"?l.lead():l.lead}</div>${l.frame?frame(typeof l.frame==='function'?l.frame():l.frame):''}${(typeof l.html==='function'?l.html():(l.html||''))}${l.brief?briefHtml(typeof l.brief==='function'?l.brief():l.brief):''}${coachBar(l)}`;
@@ -2396,12 +2425,11 @@ function render(keepScroll){
     bar.querySelectorAll("#reconf .tcard").forEach(b=>b.onclick=()=>{ST.track=b.dataset.t;remember("track",CASES[b.dataset.t].domain);persist();const _m=document.querySelector("main");render._sy=_m?_m.scrollTop:0;render(true);});
   }
   { const _m=document.querySelector("main"); if(keepScroll && _m){ const _y=render._sy||0; requestAnimationFrame(()=>{ _m.scrollTop=_y; }); } else if(_m){ _m.scrollTop=0; } }
-  if(l.prompt)document.getElementById("cpy").onclick=function(){navigator.clipboard.writeText(l.prompt.text).then(()=>{this.textContent="Copied ✓";this.classList.add("ok");setTimeout(()=>{this.textContent="Copy";this.classList.remove("ok");},1500);});};
-  document.querySelectorAll(".glink").forEach(g=>g.onclick=()=>openGuide(g.dataset.g));
-  document.querySelectorAll("#dompick button").forEach(b=>{
-    b.classList.toggle("pick",ST.domain===b.dataset.d);
-    b.onclick=()=>{ST.domain=b.dataset.d;persist();render();};
-  });
+  try{ const _cp=document.getElementById("cpy");
+    if(l.prompt&&_cp)_cp.onclick=function(){navigator.clipboard.writeText(l.prompt.text).then(()=>{this.textContent="Copied ✓";this.classList.add("ok");setTimeout(()=>{this.textContent="Copy";this.classList.remove("ok");},1500);});};
+  }catch(e){ console.warn("copy button:",e); }
+  try{ document.querySelectorAll(".glink").forEach(g=>g.onclick=()=>openGuide(g.dataset.g)); }catch(e){ console.warn("guide links:",e); }
+  try{
   const dmn=document.getElementById("dmnext");
   if(dmn)dmn.onclick=()=>{
     const v=ST.data['dm-'+l.id];const k=(typeof v==='number')?v:0;
@@ -2412,6 +2440,7 @@ function render(keepScroll){
   if(dms)dms.onclick=()=>{const _m=document.querySelector("main"); render._sy=_m?_m.scrollTop:0; ST.data['dm-'+l.id]='done';persist();render(true);};
   const dmr=document.getElementById("dmre");
   if(dmr)dmr.onclick=()=>{ST.data['dm-re-'+l.id]=!ST.data['dm-re-'+l.id];render();};
+  }catch(e){ console.warn("demo stepper:",e); }
   if(dmDone){
     wire(l);
     paintResult(l);
@@ -2435,7 +2464,17 @@ document.addEventListener('keydown',e=>{
   if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('hot')){e.preventDefault();diagTap(e.target);}
 });
 
-const BUILD="b0818-1904";
+window.addEventListener("error",e=>{
+  try{
+    console.error("PD Onboarding error:", e.message, e.filename+":"+e.lineno);
+    let n=document.getElementById("errnote");
+    if(!n){ n=document.createElement("div"); n.id="errnote";
+      n.style.cssText="position:fixed;bottom:12px;left:12px;right:12px;z-index:99999;background:#fdecea;border:1.5px solid #c0392b;color:#7a2018;font:12px Arial;padding:9px 12px;border-radius:8px";
+      document.body.appendChild(n); }
+    n.textContent="Something on this page failed to load: "+e.message+". Please send this message to the course owner.";
+  }catch(_){}
+});
+const BUILD="b0818-1922";
 window.addEventListener("load",()=>{try{console.log("PD Onboarding build "+BUILD);}catch(e){}SCORM.init();load();render();renderGuide();
   if(SCORM.storageAvailable===false){
     const c=document.getElementById("content");

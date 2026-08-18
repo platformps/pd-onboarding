@@ -1851,7 +1851,7 @@ function paintResult(l){
 /* ---------- lesson drawer ---------- */
 function renderLessonNav(){
   const el=document.getElementById("ldbody");
-  const adminBtn="";
+  const adminBtn=`<div style="font-family:var(--mono);font-size:9.5px;color:#b9c6d2;text-align:right;margin:0 0 8px">build ${BUILD}</div>`;
   el.innerHTML=adminBtn+COURSE.map(m=>{
     const _note=``;
     return `<div><div class="mod-title">${m.mod}</div>${_note}<div class="lnav">${
@@ -2435,7 +2435,8 @@ document.addEventListener('keydown',e=>{
   if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('hot')){e.preventDefault();diagTap(e.target);}
 });
 
-window.addEventListener("load",()=>{SCORM.init();load();render();renderGuide();
+const BUILD="b0818-1904";
+window.addEventListener("load",()=>{try{console.log("PD Onboarding build "+BUILD);}catch(e){}SCORM.init();load();render();renderGuide();
   if(SCORM.storageAvailable===false){
     const c=document.getElementById("content");
     if(c){const w=document.createElement("div");w.className="box rule";w.style.marginBottom="14px";

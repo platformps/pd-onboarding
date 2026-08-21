@@ -2,7 +2,7 @@
    and the standalone Hub page. Links are live from the IDPDF. */
 var GUIDE = [
 { id:"philosophy", title:"Our philosophy", icon:"❖", html:`
-<p>Per Scholas unlocks the potential of adults too often excluded from tech careers: rigorous, no-cost training aligned to what employers actually hire for. Product Development builds the courses that make that promise real: market-driven programs, client-customized cohorts, alumni upskilling, and internal training, across IT support, networking, cybersecurity, cloud, software engineering, and data.</p>
+<p>Per Scholas gives adults who have been shut out of tech careers a way in: rigorous, no-cost training aligned to what employers actually hire for. Product Development builds the courses that make that promise real. Market-driven programs, client-customized cohorts, alumni upskilling, and internal training, across IT support, networking, cybersecurity, cloud, software engineering, and data.</p>
 <p><strong>We teach adults, so we design for how adults learn (andragogy):</strong></p>
 <table class="g-table"><tr><th>Principle</th><th>What it means in our materials</th></tr>
 <tr><td><strong>Relevance first</strong></td><td>Adults need the why before the what: every lesson states its purpose up front.</td></tr>
@@ -50,7 +50,9 @@ var GUIDE = [
 <tr><td class="mono">MBP / CBP</td><td>Module / Course Blueprint: the map linking every deliverable.</td></tr>
 <tr><td class="mono">GLAB / ALAB</td><td>Guided lab, step-by-step (ungraded GLAB or graded R-GLAB) / Assignment lab, learner drives from a problem (always graded, written ALAB).</td></tr>
 <tr><td class="mono">PA · WS · ACT · CS</td><td>Practice assignment · worksheet · quick activity · case study.</td></tr>
-<tr><td class="mono">KBA / SBA</td><td>Knowledge- / Skill-Based Assessment: the summative pair closing each module.</td></tr>
+<tr><td>Knowledge check</td><td>An ungraded formative check dropped inside a lesson to catch a misunderstanding early. No file of its own; it lives in the lesson.</td></tr>
+<tr><td class="mono">Quiz</td><td>A graded, lesson-level check with its own file, numbered to the lesson (Quiz 301.2).</td></tr>
+<tr><td class="mono">KBA / SBA</td><td>Knowledge- / Skill-Based Assessment: the graded summative pair closing each module, numbered to the module with no lesson number (KBA 301). A KBA reports what learners know; it never proves they can perform the objective.</td></tr>
 <tr><td class="mono">CAP</td><td>Capstone: the integrative, presented course finale.</td></tr>
 <tr><td class="mono">R-</td><td>Marks an item graded. A guided lab can be ungraded (GLAB) or graded (R-GLAB), R- is the difference. ALABs, quizzes, KBAs, SBAs, and capstones are always graded, so they carry no R-.</td></tr>
 <tr><td class="mono">HO · SR · TB</td><td>Handout · survey · textbook.</td></tr>
@@ -223,14 +225,15 @@ var GUIDE = [
 <table class="g-table"><tr><th>When</th><th>What</th></tr>
 <tr><td><strong>Daily</strong></td><td>Warm-up discussion to open; exit ticket to close.</td></tr>
 <tr><td><strong>Weekly</strong></td><td>2–3 labs reinforcing the week's skills; at least one graded assessment of individual performance.</td></tr>
-<tr><td><strong>Module end</strong></td><td>Summative assessment: KBA and/or SBA.</td></tr>
+<tr><td><strong>Lesson level</strong></td><td>Knowledge checks inside the lesson (ungraded), and a graded Quiz where the day has knowledge worth checking formally.</td></tr>
+<tr><td><strong>Module end</strong></td><td>Summative assessment: KBA for knowledge and/or SBA for skill. A KBA alone does not measure competence.</td></tr>
 <tr><td><strong>Course end</strong></td><td>Capstone project: integrative, collaborative, presented.</td></tr></table>
 <p>Formative (informal) checks track the journey; summative (formal, graded) checks measure against the standard.</p>`},
 
 { id:"composition", title:"What goes in a module", icon:"▤", html:`
 <span style="display:inline-block;font-family:monospace;font-size:9px;letter-spacing:.06em;background:#e7f4ee;color:#186b52;border-radius:9px;padding:2px 9px;margin:0 0 8px 0">FOUNDATIONAL STANDARD</span><br>
 <p>The question every developer asks: <em>how many quizzes, reflections, and graded assignments does a module actually need?</em> There is no magic number, but there is a firm rule and a way to decide.</p>
-<p><strong>The north star:</strong> a module should spend its time letting learners <strong>prove mastery</strong>, not watch it demonstrated. If a learner could finish your module having only ever followed instructions. It is not competency-based yet. Guided practice is a ramp toward independent performance, never the destination.</p>
+<p><strong>The north star:</strong> a module should spend its time letting learners <strong>prove mastery</strong>, not watch it demonstrated. If a learner could finish your module having only ever followed instructions, it is not competency-based yet. Guided practice is a ramp toward independent performance, never the destination.</p>
 <svg viewBox="0 0 640 176" style="width:100%;height:auto;margin:4px 0 10px" role="img" aria-label="Instructor support declines across modeled, guided and independent practice, reaching zero at the summative">
 <path d="M26,30 L612,104 L26,104 Z" fill="#e3edf8"/>
 <line x1="26" y1="30" x2="612" y2="104" stroke="#1d5fa8" stroke-width="1.8"/>
@@ -276,9 +279,9 @@ var GUIDE = [
 <table class="g-table"><tr><th>Rule</th><th>In practice</th></tr>
 <tr><td><strong>Observable, measurable verb</strong></td><td>configure, explain, troubleshoot, document, build. Not: understand, learn, know, appreciate, be familiar with.</td></tr>
 <tr><td><strong>One behavior per objective</strong></td><td>Compound objectives (\u201Cexplain X and configure Y\u201D) split into two. They'll be assessed separately anyway.</td></tr>
-<tr><td><strong>Specific scope</strong></td><td>\u201CWireless security on a SOHO router,\u201D not \u201Cnetworking fundamentals.\u201D If it names a whole domain. It's a course goal, not an objective.</td></tr>
+<tr><td><strong>Specific scope</strong></td><td>\u201CWireless security on a SOHO router,\u201D not \u201Cnetworking fundamentals.\u201D If it names a whole domain, it's a course goal rather than an objective.</td></tr>
 <tr><td><strong>Evidence in sight</strong></td><td>The best objectives imply their assessment: \u201C...to a provided checklist,\u201D \u201C...giving one example of each.\u201D</td></tr>
-<tr><td><strong>Objective ≠ activity</strong></td><td>\u201CComplete GLAB 301.1.1\u201D names evidence, not capability. Ask what completing it proves. That's the objective.</td></tr></table>
+<tr><td><strong>Objective ≠ activity</strong></td><td>\u201CComplete GLAB 301.1.1\u201D names evidence, not capability. Ask what completing it proves, and you have your objective.</td></tr></table>
 <p class="g-note">Know-level objectives (\u201Cexplain,\u201D \u201Cdescribe\u201D) are legitimate scaffolding. A course just can't stall there. The outline's objectives feed module outcomes, and every design decision must trace back to one.</p>`},
 
 { id:"kba", title:"Writing KBAs & quizzes", icon:"?", html:`
@@ -352,7 +355,10 @@ var GUIDE = [
 <li>Keep your review evidence (what you verified, corrected, and cut) available for QA</li>
 <li>Disclose AI assistance where policy requires it; when unsure, ask before shipping</li>
 </ul>
-<p class="g-note">These are organizational rules, not just craft advice. Confirm the current policy with Product Development before assuming. And note the distinction: using AI to <em>develop</em> materials (these rules) is different from designing <em>learner-facing</em> AI activities (the two rules + Integrity Rubric above).</p>`},
+<p class="g-note">These are organizational rules, not just craft advice. Confirm the current policy with Product Development before assuming. And note the distinction: using AI to <em>develop</em> materials (these rules) is different from designing <em>learner-facing</em> AI activities (the two rules + Integrity Rubric above).</p>
+<p style="font-weight:600;margin-top:14px">Required training</p>
+<p>Every Development SME completes the <a href="https://www.coursera.org/professional-certificates/google-ai" target="_blank" rel="noopener"><strong>Google AI Professional Certificate</strong></a> on Coursera: eight short courses, roughly eight hours, covering prompting, responsible use, and building with Gemini, Google Workspace, and AI Studio. Send the completion certificate to your manager. Do it before your first real build where you can.</p>
+<p class="g-note">The certificate gives you tool fluency. This Handbook gives you the standard the tool's output has to meet. Neither substitutes for the other, and the certificate teaches Google tools specifically, so check <strong>Approved software</strong> for what is cleared for our work before building with anything it introduces.</p>`},
 
 { id:"prompts", title:"Prompt library", icon:"⌘", html:`
 <p>House prompts for AI-assisted builds. Copy, fill the brackets from your approved outline/objectives, run, then <strong>verify everything</strong>.</p>

@@ -1964,7 +1964,7 @@ function actHtml(l){
   }
   if(a.type==="track"){
     return `<div class="track-pick" id="tp-${a.id}">${CASE_ORDER.map(id=>{const c=CASES[id];
-      return `<button type="button" class="tcard ${ST.track===id?'sel':''}" data-t="${id}" aria-pressed="${ST.track===id?'true':'false'}"><span class="tcd">${c.tag} track</span><div class="tcp">${c.domain}</div><div class="tcr">${c.role}${c.ph_role?' *':''} · ${c.productType}</div></button>`;}).join("")}</div>
+      return `<button type="button" class="tcard ${ST.track===id?'sel':''}" data-t="${id}" aria-pressed="${ST.track===id?'true':'false'}"><span class="tcd">${c.tag} track</span><div class="tcp">${c.domain}</div><div class="tcr" title="${c.ph_role?'Role title still being confirmed with the client':''}">${c.role}${c.ph_role?' (title to be confirmed)':''} · ${c.productType}</div></button>`;}).join("")}</div>
       ${ST.track?`<div class="mk-msg okc" style="margin-top:10px">\u2713 Primary project set: <b>${CASES[ST.track].domain}</b>. Units 2\u20134 build this one; you can switch it here anytime before you continue.</div>`:''}
       <div class="mk-msg" id="msg-${a.id}"></div>`;
   }
@@ -2492,7 +2492,7 @@ window.addEventListener("error",e=>{
     n.textContent="Something on this page failed to load: "+e.message+". Please send this message to the course owner.";
   }catch(_){}
 });
-const BUILD="b0825-0120";
+const BUILD="b0825-1718";
 window.addEventListener("load",()=>{try{console.log("PD Onboarding build "+BUILD);}catch(e){}SCORM.init();load();render();renderGuide();
   if(SCORM.storageAvailable===false){
     const c=document.getElementById("content");

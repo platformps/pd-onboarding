@@ -1,0 +1,31 @@
+# The repo holds what GitHub Pages serves, and nothing else.
+# Served: index.html, unit1-4.html, course.js, course.css, engine.js,
+#         guide.js, storage.js, capstone/
+# Everything below is local tooling. None of it is fetched by a browser.
+
+# Build tools. They turn course.js into the unit pages; the output is committed,
+# the generators are not.
+# build.js            writes unit1-4.html from course.js + unit.template.html
+# unit.template.html  the shell build.js fills in
+# build-canvas.js     writes index-canvas.html from index.html
+# index-canvas.html   paste-into-Canvas copy of the landing page, never hosted
+build.js
+unit.template.html
+build-canvas.js
+index-canvas.html
+
+# Checks run before a rebuild
+# check.js   validates flow, vocabulary, bridges and activity variety
+# prose.js   scans lesson prose for AI-writing tells
+# verify.py  renders every lesson, checks contrast against WCAG 2.1 AA
+# SPEC.md    the rules the three scripts above enforce
+check.js
+prose.js
+verify.py
+SPEC.md
+
+# Claude Code configuration, not course content
+.claude/
+
+# Screenshots taken while checking a render
+shot*.png

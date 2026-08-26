@@ -1,7 +1,0 @@
-[
-  {
-    "note": "the evidence is already aggregated in a shared database; reading it is the first move at this gate. Pilots also get a retrospective.",
-    "find": " <div class=\"ruleline\">",
-    "replace": " <p><strong>Where the evidence already lives.</strong> Assessment data from every module, across every cohort, feeds a shared database and comes back aggregated for viewing. The numbers are waiting rather than needing to be gathered, so reading them is the first move at this gate. Going there before deciding what needs changing is the practice: the pattern is usually already visible, and a finding that contradicts it is usually a sample of one.</p>\n <p><strong>A pilot earns a retrospective too.</strong> A first run has more to say than its numbers do. Sitting down with the instructors and the team while it is fresh surfaces what the data cannot: what confused people, what got cut for time, and what the instructor quietly worked around.</p>\n <div class=\"ruleline\">"
-  }
-]

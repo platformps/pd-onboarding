@@ -1,0 +1,43 @@
+[
+  {
+    "note": "judging as a verb for reviewing work reads oddly; the noun judgment stays",
+    "find": "hands you the real job: judging what Design sent, writing an objective, building a lab, answering QA",
+    "replace": "hands you the real job: reading what Design sent, writing an objective, building a lab, answering QA"
+  },
+  {
+    "find": "Unit 2 moves from judging what arrives to designing what goes inside it.",
+    "replace": "Unit 2 moves from checking what arrives to designing what goes inside it."
+  },
+  {
+    "find": "Objectives get judged one at a time, but a module is a set of them working together",
+    "replace": "Objectives get checked one at a time, but a module is a set of them working together"
+  },
+  {
+    "find": "bridge:\"Unit 2 judged objectives, module shape, cadence and a day plan, all of it written by somebody else.",
+    "replace": "bridge:\"Unit 2 worked over objectives, module shape, cadence and a day plan, all of it written by somebody else."
+  },
+  {
+    "find": "Everything in this unit was judging work someone else wrote.",
+    "replace": "Everything in this unit was reviewing work someone else wrote."
+  },
+  {
+    "find": "Unit 4 is about judging whether the whole thing is ready to ship.",
+    "replace": "Unit 4 is about deciding whether the whole thing is ready to ship."
+  },
+  {
+    "find": "staged its repo, judged its objectives, planned its assessment cadence",
+    "replace": "staged its repo, worked over its objectives, planned its assessment cadence"
+  },
+  {
+    "find": "because what is being judged is whether the capability was demonstrated.",
+    "replace": "because what is being measured is whether the capability was demonstrated."
+  },
+  {
+    "find": "bridge:\"Development Review judges a module against what was agreed for it.",
+    "replace": "bridge:\"Development Review measures a module against what was agreed for it."
+  },
+  {
+    "find": "It is the normal condition of the work, and what gets judged is the response.",
+    "replace": "It is the normal condition of the work, and what gets assessed is the response."
+  }
+]

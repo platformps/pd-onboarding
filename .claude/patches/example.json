@@ -1,0 +1,12 @@
+[
+  {
+    "note": "Unit 1: a real worked example of a module repo, alongside the naming rules the lesson teaches",
+    "find": " <p class=\"tight\" style=\"color:var(--muted)\">Create each file the brief calls for",
+    "replace": " <div class=\"ruleline\"><b>A real one to look at.</b> <a href=\"https://docs.google.com/document/d/1oVfC3B3Bz3fdJ-dhkqVRBqPxNRkoP7xEtw_YCZwtbCs/edit?tab=t.0#heading=h.qyjfmdipkf8v\" target=\"_blank\" rel=\"noopener\">Open the worked example</a> and read it beside what you are about to build. It is the same convention at full size, on a real module rather than a teaching example.</div>\n <p class=\"tight\" style=\"color:var(--muted)\">Create each file the brief calls for"
+  },
+  {
+    "note": "Unit 4: the same example, now read as the thing being handed over",
+    "find": " <p class=\"tight\" style=\"color:var(--muted)\">Write the rows into the two boxes",
+    "replace": " <div class=\"ruleline\"><b>The same example, read differently.</b> <a href=\"https://docs.google.com/document/d/1oVfC3B3Bz3fdJ-dhkqVRBqPxNRkoP7xEtw_YCZwtbCs/edit?tab=t.0#heading=h.qyjfmdipkf8v\" target=\"_blank\" rel=\"noopener\">Open the worked example</a>. In Unit 1 you read it as a set of file names. Read it now as the document somebody else navigates the module by.</div>\n <p class=\"tight\" style=\"color:var(--muted)\">Write the rows into the two boxes"
+  }
+]

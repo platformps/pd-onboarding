@@ -26,7 +26,7 @@ var GUIDE = [
 <li><a href="https://www.pnas.org/doi/10.1073/pnas.1319030111" target="_blank" rel="noopener">Freeman et al. (2014), PNAS</a>: a 225-study meta-analysis showing active learning lifts exam performance ~0.47 SD; lecture-only courses fail ~1.5× more students. The research floor under our 75% rule.</li>
 <li>Hattie &amp; Timperley (2007), “The Power of Feedback,” <em>Review of Educational Research</em>: feedback is among the strongest influences on achievement, and its design matters. Behind every rubric and verdict we write.</li>
 <li>Black &amp; Wiliam (1998), “Inside the Black Box”: formative assessment drives some of the largest documented learning gains. Why the daily warm-up/exit-ticket rhythm exists.</li>
-<li>Roediger &amp; Karpicke (2006), “Test-Enhanced Learning,” <em>Psychological Science</em>: retrieval practice beats re-reading. Why assessments are learning events, not just measurements.</li>
+<li>Roediger &amp; Karpicke (2006), “Test-Enhanced Learning,” <em>Psychological Science</em>: retrieval practice beats re-reading. Why assessments are learning events, not only measurements.</li>
 <li>Wiggins &amp; McTighe, <em>Understanding by Design</em> (ASCD), the backward-design source text: outcomes → evidence → experiences.</li>
 <li>Mayer, <em>Multimedia Learning</em>: the coherence principle and friends; the science behind cutting extraneous material, even the charming kind.</li>
 <li>Knowles, <em>The Adult Learner</em>. Andragogy: the five principles on our philosophy page come from here.</li>
@@ -39,7 +39,7 @@ var GUIDE = [
 <tr><td>Outline scope, objectives, project charters, timelines</td><td>The Instructional Design &amp; Development Director (your PM for every build)</td></tr>
 <tr><td>Domain content: IT/networking/cyber, software engineering, data</td><td>The Product Developer (SME) who owns that domain</td></tr>
 <tr><td>Templates, naming, QA findings, review standards</td><td>Product Quality &amp; Experience</td></tr>
-<tr><td>Surveys, assessment data, outcomes reporting</td><td>Learning Outcomes &amp; Reporting</td></tr>
+<tr><td>Surveys, assessment data, outcomes reporting (the <a href="https://productops.perscholas.org/surveys" target="_blank" rel="noopener">surveys dashboard</a>)</td><td>Learning Outcomes &amp; Reporting</td></tr>
 <tr><td>Canvas mechanics, New Quizzes, LMS access</td><td>EdTech</td></tr>
 <tr><td>Anything that fits no category</td><td><span class="mono">productdevteam@perscholas.org</span></td></tr></table>
 <p class="g-note">Asking early is a professional habit here, not a weakness: a five-minute question at Planning saves a five-day rework at QA.</p>`},
@@ -58,7 +58,7 @@ var GUIDE = [
 <tr><td class="mono">FG</td><td>Facilitator Guide: the instructor's delivery companion (module and course levels).</td></tr>
 <tr><td>New Quizzes</td><td>Canvas's item-bank quiz engine, always used over Classic, so bank fixes propagate everywhere.</td></tr>
 <tr><td>Activated learning</td><td>Learners producing (discussing, building, solving) vs. passively receiving. Budgeted at ≥75%.</td></tr>
-<tr><td>Backward design</td><td>Outcomes first, then assessment evidence, then experiences, content last.</td></tr>
+<tr><td>ADDIE</td><td>Analysis, design, development, implementation, evaluation. The five phases our department is structured around; our seven process steps are how we run them.</td></tr><tr><td>Backward design</td><td>Outcomes first, then assessment evidence, then experiences, content last.</td></tr>
 <tr><td>Modality R / P / H</td><td>Remote · in-person · hybrid (approved Hybrid Days model only).</td></tr>
 <tr><td>Formative / summative</td><td>Checks that track the journey (warm-ups, exit tickets) vs. graded measures against the standard (KBA, SBA, capstone).</td></tr></table>`},
 
@@ -230,7 +230,7 @@ var GUIDE = [
 { id:"composition", title:"What goes in a module", icon:"▤", html:`
 <span style="display:inline-block;font-family:monospace;font-size:9px;letter-spacing:.06em;background:#e7f4ee;color:#186b52;border-radius:9px;padding:2px 9px;margin:0 0 8px 0">FOUNDATIONAL STANDARD</span><br>
 <p>The question every developer asks: <em>how many quizzes, reflections, and graded assignments does a module actually need?</em> There is no magic number, but there is a firm rule and a way to decide.</p>
-<p><strong>The north star:</strong> a module should spend its time letting learners <strong>prove mastery</strong>, not watch it demonstrated. If a learner could finish your module having only ever followed instructions. It is not competency-based yet. Guided practice is a ramp toward independent performance, never the destination.</p>
+<p><strong>What a module owes its learners:</strong> a module should spend its time letting learners <strong>prove mastery</strong>, not watch it demonstrated. If a learner could finish your module having only ever followed instructions. It is not competency-based yet. Guided practice is a ramp toward independent performance, never the destination.</p>
 <svg viewBox="0 0 640 176" style="width:100%;height:auto;margin:4px 0 10px" role="img" aria-label="Instructor support declines across modeled, guided and independent practice, reaching zero at the summative">
 <path d="M26,30 L612,104 L26,104 Z" fill="#e3edf8"/>
 <line x1="26" y1="30" x2="612" y2="104" stroke="#1d5fa8" stroke-width="1.8"/>
@@ -268,8 +268,8 @@ var GUIDE = [
 <tr><td><strong>Standard</strong><br>(~4\u20136+ lessons)</td><td>Full arc: teach \u2192 guided practice \u2192 fading scaffold \u2192 independent practice \u2192 summative competency task. The default every module aspires to.</td></tr>
 <tr><td><strong>Short</strong><br>(1\u20132 days)</td><td>Compress the ramp, keep the proof. One tight teach/guided pass, then straight to an independent performance task. Drop the mid-module checkpoint, not the summative. Even two days should end with the learner <em>doing</em>.</td></tr>
 <tr><td><strong>Prep / foundational</strong></td><td>When a module genuinely <em>is</em> prerequisite (terminology, safety, setup), its check may be a knowledge check or gated readiness task rather than a full problem-solve, but only if it is honestly foundational, and only the minimum needed to unlock the hands-on work.</td></tr>
-<tr><td><strong>Vendor-constrained</strong></td><td>When third-party content only teaches \u201Cfollow the steps,\u201D you often cannot build problem-solving inside it. Author the competency assessment <em>on top</em>: your own SBA posing a real problem, using the vendor material as input. Raise equipment/authoring needs in the design phase, before development.</td></tr></table>
-<p class="g-note">Before you finalize a module, ask: Does every objective end in <em>independent</em> evidence, not just guided? Does time skew toward doing over consuming? Does the scaffold fade? Does it close with unaided performance? Which type is this, and does its assessment match? When in doubt, protect the summative and cut the filler.</p>`},
+<tr><td><strong>Vendor-constrained</strong></td><td>When third-party content only teaches \u201Cfollow the steps,\u201D there is no room to build problem-solving inside it. Author the competency assessment <em>on top</em>: your own SBA posing a real problem, using the vendor material as input. Raise equipment/authoring needs in the design phase, before development.</td></tr></table>
+<p class="g-note">Before you finalize a module, ask: Does every objective end in <em>independent</em> evidence, rather than guided practice? Does time skew toward doing over consuming? Does the scaffold fade? Does it close with unaided performance? Which type is this, and does its assessment match? When in doubt, protect the summative and cut the filler.</p>`},
 
 { id:"objectives", title:"Writing objectives", icon:"✎", html:`
 <p>Objectives are the load-bearing sentences of a course: assessments, labs, and lesson days are all built from them. The test for every objective: <strong>could you watch a learner do it, and would two instructors agree it happened?</strong></p>
@@ -279,11 +279,11 @@ var GUIDE = [
 <tr><td><strong>Specific scope</strong></td><td>\u201CWireless security on a SOHO router,\u201D not \u201Cnetworking fundamentals.\u201D If it names a whole domain. It's a course goal, not an objective.</td></tr>
 <tr><td><strong>Evidence in sight</strong></td><td>The best objectives imply their assessment: \u201C...to a provided checklist,\u201D \u201C...giving one example of each.\u201D</td></tr>
 <tr><td><strong>Objective ≠ activity</strong></td><td>\u201CComplete GLAB 301.1.1\u201D names evidence, not capability. Ask what completing it proves. That's the objective.</td></tr></table>
-<p class="g-note">Know-level objectives (\u201Cexplain,\u201D \u201Cdescribe\u201D) are legitimate scaffolding. A course just can't stall there. The outline's objectives feed module outcomes, and every design decision must trace back to one.</p>`},
+<p class="g-note">Know-level objectives (\u201Cexplain,\u201D \u201Cdescribe\u201D) are legitimate scaffolding. A course cannot stall there. The outline's objectives feed module outcomes, and every design decision must trace back to one.</p>`},
 
 { id:"kba", title:"Writing KBAs & quizzes", icon:"?", html:`
 <span style="display:inline-block;font-family:monospace;font-size:9px;letter-spacing:.06em;background:#e7f4ee;color:#186b52;border-radius:9px;padding:2px 9px;margin:0 0 8px 0">REQUIRED STANDARD</span><br><p>KBAs measure concepts, but write past recall into higher-order thinking (application, analysis, problem-solving) where you can.</p>
-<p><strong>Stems:</strong> concise, simple wording; no grammatical giveaways (a/an, singular/plural); avoid negatives: if unavoidable, <strong>bold</strong> the <strong>not</strong>/<strong>except</strong>; don't let one question answer another.</p>
+<p><strong>Stems:</strong> concise, plain wording; no grammatical giveaways (a/an, singular/plural); avoid negatives: if unavoidable, <strong>bold</strong> the <strong>not</strong>/<strong>except</strong>; don't let one question answer another.</p>
 <p><strong>Responses:</strong> one best answer; grammatically consistent with the stem; no absolutes (always/never); consistent length; vary the correct answer's position; mutually exclusive options; logical order; avoid "all/none of the above" (if used, use them generously, not only when correct).</p>
 <p><strong>Build in <a href="https://community.canvaslms.com/t5/Instructor-Guide/How-do-I-create-a-quiz-using-New-Quizzes/ta-p/1173" target="_blank" rel="noopener">Canvas New Quizzes</a></strong> (migration: <a href="https://community.canvaslms.com/t5/Instructor-Guide/How-do-I-migrate-a-Canvas-quiz-to-New-Quizzes/ta-p/991" target="_blank" rel="noopener">Classic → New guide</a>), never Classic: item-bank changes then propagate to every course using them. Name banks after the KBA; set bank permissions viewable by the institution; retired banks get <span class="mono">[retired]</span> appended.</p>`},
 
@@ -337,7 +337,7 @@ var GUIDE = [
 { id:"ai", title:"AI standards & Integrity Rubric", icon:"✦", html:`
 <p>AI is built into the actual work learners do, not bolted on. Two rules for every course:</p>
 <p class="tight">1. <strong>No specific AI tool named in instructions</strong> unless approved in the course outline: say "an AI assistant" until then.</p>
-<p class="tight">2. <strong><span style="font-family:monospace;font-size:9px;background:#f3eee6;color:#5b6b7a;border-radius:9px;padding:1px 7px">ORG REQUIREMENT</span> Every learner-facing AI activity is graded.</strong> Ungraded AI activities don't count toward KPIs and can't measure outcomes.</p>
+<p class="tight">2. <strong><span style="font-family:monospace;font-size:9px;background:#f3eee6;color:#5b6b7a;border-radius:9px;padding:1px 7px">ORG REQUIREMENT</span> Every summative assessment involving AI is graded.</strong> If a KBA, SBA or capstone asks a learner to use AI, that work carries a grade and the Integrity Rubric, because ungraded summative work cannot measure outcomes or count toward KPIs. Practice activities are at your discretion: grade them where the task is hard enough that the learner needs the feedback, and leave them ungraded where they are scaffolding toward something that is graded.</p>
 <p style="margin-top:10px"><strong>AI Integrity Rubric</strong>: embed it inside any assignment rubric with an AI component. Three dimensions, each 0–3; a learner meets the standard at <strong>2+ on all three</strong>. Bands: 9 exceeds · 6–8 passes · 3–5 needs revision · 0–2 does not pass.</p>
 <table class="g-table"><tr><th>Dimension</th><th>What a 2 ("meets") looks like</th></tr>
 <tr><td><strong>Purposeful AI Use</strong></td><td>Learner clearly explains how AI was used and shows it was purposeful.</td></tr>
@@ -352,7 +352,7 @@ var GUIDE = [
 <li>Keep your review evidence (what you verified, corrected, and cut) available for QA</li>
 <li>Disclose AI assistance where policy requires it; when unsure, ask before shipping</li>
 </ul>
-<p class="g-note">These are organizational rules, not just craft advice. Confirm the current policy with Product Development before assuming. And note the distinction: using AI to <em>develop</em> materials (these rules) is different from designing <em>learner-facing</em> AI activities (the two rules + Integrity Rubric above).</p>`},
+<p class="g-note">These are organizational rules rather than craft advice. Confirm the current policy with Product Development before assuming. And note the distinction: using AI to <em>develop</em> materials (these rules) is different from designing <em>learner-facing</em> AI activities (the two rules + Integrity Rubric above).</p>`},
 
 { id:"prompts", title:"Prompt library", icon:"⌘", html:`
 <p>House prompts for AI-assisted builds. Copy, fill the brackets from your approved outline/objectives, run, then <strong>verify everything</strong>.</p>
@@ -367,7 +367,7 @@ narration per slide; (3) one knowledge-check question with the answer
 and why each distractor is wrong.
 
 Rules: every slide serves the objective. Do NOT invent statistics,
-tools, versions, or sources - write [VERIFY] where a fact is needed.</pre></div>
+tools, versions, or sources: write [VERIFY] where a fact is needed.</pre></div>
 <div class="g-prompt"><div class="g-ph">Guided lab draft</div><pre>Draft a guided lab for Per Scholas following this exact structure:
 Title / Objectives (2-3 bullets) / Requirements / Scenario /
 Steps (named, with subtasks) / Reflection question.
@@ -402,7 +402,7 @@ is plausible but wrong. Mark facts to check with [VERIFY].</pre></div>`},
 <li>Module Blueprint (MBP): one per module, started as soon as the module has content and current at handoff, with every file listed in delivery order and linked</li>
 <li>Module Facilitator Guide: content breakdown, materials, delivery detail, tips, troubleshooting/FAQ, closure</li>
 </ul>
-<p>Course level adds: syllabus, course blueprint, course facilitator guide (index), capstone, resume skills doc, interview questions, training schedule, permissions list (or the no-copyright statement).</p>`},
+<p>Course level adds: syllabus, course blueprint, course facilitator guide (index), capstone, resume skills doc, interview questions, training schedule. Third-party material is either purchased from the vendor or used with attribution, so there is no separate permissions document.</p>`},
 
 { id:"access", title:"Accessibility essentials", icon:"◎", html:`
 <span style="display:inline-block;font-family:monospace;font-size:9px;letter-spacing:.06em;background:#e7f4ee;color:#186b52;border-radius:9px;padding:2px 9px;margin:0 0 8px 0">REQUIRED, LAUNCH PREREQUISITE</span><br>

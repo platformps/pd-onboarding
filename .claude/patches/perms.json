@@ -1,0 +1,16 @@
+[
+  {
+    "note": "invented specificity: nothing anywhere establishes three vendor images. The Handbook says permissions list or the no-copyright statement, for third-party content.",
+    "find": "Permissions list<span class=\"an\"> &nbsp;cleared for the three vendor images</span>",
+    "replace": "Permissions list<span class=\"an\"> &nbsp;cleared for every piece of third-party content, or a no-copyright statement in its place</span>"
+  },
+  {
+    "find": "{t:\"Permissions list for the vendor images\",k:\"c\"},",
+    "replace": "{t:\"Permissions list, or the no-copyright statement\",k:\"c\"},"
+  },
+  {
+    "note": "handoff now runs before instructor enablement, so it should hand to it rather than skip ahead",
+    "find": "The package is with the Canvas team, instructors train on it, and a cohort starts. What lands after that is a",
+    "replace": "The package is with the Canvas team and the Canvas course gets built from it. Nobody has yet been shown how to teach it, and that is a"
+  }
+]

@@ -1,0 +1,37 @@
+{id:"airec",title:"Write the AI-use record",crumb:"Unit 3 · AI-use record",mins:6,
+ bridge:"Three pages have set the standard for building with an AI assistant: verify every claim, control what goes into the tool, and keep a named human on the output. None of that is visible to anybody who opens the finished module.",
+ frame:{now:"The AI standards are settled. Nothing in the module shows how they were met on this build.",
+  role:"You are writing the record that ships in the module repo beside the blueprint.",
+  resp:"Write half a page: what an assistant drafted, what you verified and how, what you corrected or cut, and what you wrote yourself.",
+  use:"The AI standards in the Handbook, and your own build of module 301.",
+  why:"Keeping your review evidence is an organizational guardrail, and a record written at handoff is written from memory."},
+ lead:"Working with an assistant leaves no trace on the file it produced. The AI-use record is that trace: half a page, filed with the module, naming what a tool drafted and what a person did about it. It is item 3 of your capstone package, and it is the only item that says how the rest were made.",
+ coach:"<b>Type the record into the two boxes</b>: what was drafted and how you verified it in the first, what you corrected or cut and what you wrote yourself in the second. Nothing is graded. A record that names the tool and stops leaves QA nothing to check, which is the same as filing none. When you <b>Save</b>, an experienced developer's record appears beside yours with a checklist to run your own through.",
+ hint:"Write it while you build rather than afterward. Name the file and the claim instead of the category: \"the four commands in step 4, run on the lab image and checked against the vendor documentation\" is a record, and \"verified for accuracy\" is a sentence about verification.",
+ html:`<p><strong>What the record settles.</strong> Drafting heavily with an approved assistant is expected here. An unexamined draft is a QA finding. From outside the build, the two look the same.</p>
+ <div class="terms"><div class="th">Half a page, in four lines</div><dl>
+ <dt>Drafted</dt><dd>Which files, and which parts of them.</dd>
+ <dt>Verified</dt><dd>Each claim you checked, and what against.</dd>
+ <dt>Corrected or cut</dt><dd>What came back wrong, and what you removed.</dd>
+ <dt>Wrote yourself</dt><dd>The parts no tool touched.</dd></dl></div>
+ <div class="spec"><div class="spec-h">Module 301 &middot; AI-use record</div><div class="spec-b">Drafted: GLAB 301.2.1 steps 1 to 6, approved assistant<span class="an"> &nbsp;the file, not the category</span><br>Verified: ran the four commands on the lab image; checked service names against the vendor documentation<br>Corrected: step 4 named a service not on our image<br>Cut: a BIOS reset, unverifiable on this hardware<span class="an"> &nbsp;removed rather than repaired</span><br>Wrote myself: the scenario, the reflection question, the FG 301 look-fors</div><div class="spec-n">Half a page, and no claim a reviewer cannot check.</div></div>
+ <p class="tight">The standard learners meet under the Integrity Rubric is the one we meet here: ${gl('ai','AI standards &amp; the Integrity Rubric')}. The record is filed in the repo beside the blueprint, with everything in ${gl('templates','templates &amp; links')}.</p>
+ <p class="tight" style="color:var(--muted)">Write yours below. The model appears once you save.</p>`,
+ activity:{type:"journal",id:"airecw",
+  fields:[
+   {label:"1. What an assistant drafted for module 301, and how you verified it. Name the file, the claim, and what you checked it against.",
+    ph:"Drafted: GLAB 301.2.1 steps 1 to 6 …\nVerified: ran … and checked … against …",
+    short:"Box 1 · drafted and verified",
+    checks:[{"want":"drafted|draft|generated|produced","ok":"Names what the tool drafted.","no":"Nothing marked as drafted. The record opens with what came out of the tool."},{"want":"verified|checked|ran|tested|confirmed","ok":"Names the verification.","no":"No verification named. \"I used an assistant\" is a disclosure, and the record has to carry the check as well."},{"want":"against|documentation|image|source|standard|objective","ok":"Says what the claim was checked against.","no":"Says it was verified without saying against what. The thing it was checked against is the part QA can repeat."},{"minWords":15,"ok":"Specific enough for a reviewer to follow.","no":"Too short to carry the file, the claim, and what it was checked against."}]},
+   {label:"2. What you corrected or cut, and what you wrote yourself.",
+    ph:"Corrected: …\nCut: …\nWrote myself: …",
+    short:"Box 2 · corrected, cut, and your own",
+    checks:[{"want":"corrected|fixed|rewrote|repaired|replaced","ok":"Names a correction.","no":"No correction named. A draft that needed nothing changed is a draft nobody read closely."},{"want":"cut|removed|dropped|rejected|left out","ok":"Names something cut.","no":"Nothing cut. What you removed rather than repaired is where your judgment shows."},{"pattern":"(wrote|written|my own|mine|myself)","ok":"Marks what you wrote yourself.","no":"Nothing marked as your own writing. A reviewer needs the boundary between the tool and you."},{"minWords":12,"ok":"All three parts carry detail.","no":"Too short to carry a correction, a cut, and what you wrote yourself."}]}],
+  modelHead:"An experienced developer's record, and how to check yours",
+  model:`<p class="tight"><b>Drafted.</b> "First pass at GLAB 301.2.1 steps 1 to 6, and the distractors for four KBA 301 items. Approved assistant. Nothing client-identifying went in, and the fault scenarios are synthetic."</p>
+  <p class="tight"><b>Verified.</b> "Ran all four commands on the lab image with a standard account. Checked every service name against the vendor documentation. Checked each distractor against the objective the item is supposed to measure."</p>
+  <p class="tight"><b>Corrected or cut.</b> "Step 4 named a service that is not on our image, so it now names the one that is. The draft suggested a BIOS reset I could not verify as safe on this hardware, so it is out. Two distractors were filler, and I rewrote them from mistakes I have watched learners make."</p>
+  <p class="tight"><b>Wrote myself.</b> "The scenario, the reflection question, the rubric rows, and every look-for in FG 301."</p>
+  <div class="box rule" style="margin-top:10px"><span class="bh">Check your own against these</span><ul class="blist"><li>&#9744; Every line names a file or an item rather than a category of work.</li><li>&#9744; Verification says what the claim was checked against, and a reviewer could repeat it.</li><li>&#9744; Something was corrected and something was cut, both named.</li><li>&#9744; What you wrote yourself is on the page, so the boundary is visible.</li><li>&#9744; No client-confidential material and no learner data went into the tool.</li><li>&#9744; It fits on half a page and reads as a record rather than a defense.</li></ul></div>
+  <p class="tight" style="color:var(--muted)">A line that would stay true whatever the tool returned is carrying no information. Rewrite that one.</p>`},
+ transition:"How this module was made is now on the record. What Unit 3 owes at the end is a piece of the material itself, written to the standard every page of this unit has been setting."},
